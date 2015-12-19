@@ -1,5 +1,6 @@
 UniCHenta
 =========
+This is just a basic readme. More might come eventually.
 
 What is it?
 -----------
