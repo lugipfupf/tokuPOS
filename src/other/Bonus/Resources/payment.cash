@@ -1,0 +1,36 @@
+//    uniCenta oPOS - Touch Friendly Point Of Sale
+//    Copyright (c) 2009-2015 uniCenta
+//    http://sourceforge.net/projects/unicentaopos
+//
+//    This file is part of uniCenta oPOS.
+//
+//    uniCenta oPOS is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    uniCenta oPOS is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with uniCenta oPOS.  If not, see <http://www.gnu.org/licenses/>.
+// *************************************************************************
+
+// This file contains all the buttons necessary to display swiss coins and bills
+
+payment.addButton("coin.005", 0.05);
+payment.addButton("coin.010", 0.1);
+payment.addButton("coin.020", 0.2);
+payment.addButton("coin.050", 0.5);
+payment.addButton("coin.100", 1.0);
+payment.addButton("coin.200", 2.0);
+payment.addButton("coin.500", 5.0);
+
+payment.addButton("note.0010", 10.0);
+payment.addButton("note.0020", 20.0);
+payment.addButton("note.0050", 50.0);
+payment.addButton("note.0100", 100.0);
+payment.addButton("note.0200", 200.0);
+payment.addButton("note.1000", 1000.0);
