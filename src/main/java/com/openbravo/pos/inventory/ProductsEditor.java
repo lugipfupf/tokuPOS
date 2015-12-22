@@ -16,7 +16,6 @@
 //
 //    You should have received a copy of the GNU General Public License
 //    along with uniCenta oPOS.  If not, see <http://www.gnu.org/licenses/>.
-
 package com.openbravo.pos.inventory;
 
 import com.openbravo.basic.BasicException;
@@ -66,10 +65,12 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 //    private Object m_Printkb; - use this for printernumber
 //    private Object m_Sendstatus; - use this for sent y/n or resend
 //    private Object m_Lineorder; - shuffle ticketlines into group (starters, mains etc)
-
-    /** Creates new form JEditProduct
+    /**
+     * Creates new form JEditProduct
+     *
      * @param dlSales
-     * @param dirty */
+     * @param dirty
+     */
     public ProductsEditor(DataLogicSales dlSales, DirtyManager dirty) {
         initComponents();
 
@@ -107,16 +108,16 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jSendStatus.addActionListener(dirty);
         m_jService.addActionListener(dirty);
         txtAttributes.getDocument().addDocumentListener(dirty);
-        m_jDisplay.getDocument().addDocumentListener(dirty); 
+        m_jDisplay.getDocument().addDocumentListener(dirty);
         m_jVprice.addActionListener(dirty);
-        m_jVerpatrib.addActionListener(dirty); 
-        m_jTextTip.getDocument().addDocumentListener(dirty); 
+        m_jVerpatrib.addActionListener(dirty);
+        m_jTextTip.getDocument().addDocumentListener(dirty);
         m_jCheckWarrantyReceipt.addActionListener(dirty);
-        m_jStockUnits.getDocument().putProperty(dlSales,26);
-        
+        m_jStockUnits.getDocument().putProperty(dlSales, 26);
+
         m_jInCatalog.addActionListener(dirty);
         m_jCatalogOrder.getDocument().addDocumentListener(dirty);
-        
+
 // Auto-calc fields listeners 
         FieldsManager fm = new FieldsManager();
         m_jPriceBuy.getDocument().addDocumentListener(fm);
@@ -125,7 +126,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jPriceSellTax.getDocument().addDocumentListener(new PriceTaxManager());
         m_jmargin.getDocument().addDocumentListener(new MarginManager());
         m_jGrossProfit.getDocument().addDocumentListener(new MarginManager());
-        
+
         writeValueEOF();
     }
 
@@ -134,7 +135,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
      * @throws BasicException
      */
     public void activate() throws BasicException {
-        
+
         // Load the taxes logic
         taxeslogic = new TaxesLogic(taxsent.list());
 
@@ -173,25 +174,25 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jPriceBuy.setText(null);
         setPriceSell(null);
         m_CategoryModel.setSelectedKey(null);
-        taxcatmodel.setSelectedKey(null);        
+        taxcatmodel.setSelectedKey(null);
         attmodel.setSelectedKey(null);
         m_jstockcost.setText("0.0");
         m_jstockvolume.setText("0.0");
         m_jImage.setImage(null);
         m_jComment.setSelected(false);
         m_jScale.setSelected(false);
-	m_jKitchen.setSelected(false);
-	m_jPrintKB.setSelected(false);
-	m_jSendStatus.setSelected(false);        
-	m_jService.setSelected(false);
+        m_jKitchen.setSelected(false);
+        m_jPrintKB.setSelected(false);
+        m_jSendStatus.setSelected(false);
+        m_jService.setSelected(false);
         txtAttributes.setText(null);
         m_jDisplay.setText(null);
         m_jVprice.setSelected(false);
-        m_jVerpatrib.setSelected(false); 
-        m_jTextTip.setText(null); 
-        m_jCheckWarrantyReceipt.setSelected(false);   
-	m_jStockUnits.setVisible(false);    
-        
+        m_jVerpatrib.setSelected(false);
+        m_jTextTip.setText(null);
+        m_jCheckWarrantyReceipt.setSelected(false);
+        m_jStockUnits.setVisible(false);
+
         m_jInCatalog.setSelected(false);
         m_jCatalogOrder.setText(null);
 
@@ -211,19 +212,19 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jImage.setEnabled(false);
         m_jComment.setEnabled(false);
         m_jScale.setEnabled(false);
-	m_jKitchen.setEnabled(false);
-	m_jPrintKB.setVisible(false);
-	m_jSendStatus.setVisible(false);        
+        m_jKitchen.setEnabled(false);
+        m_jPrintKB.setVisible(false);
+        m_jSendStatus.setVisible(false);
         m_jService.setEnabled(false);
         txtAttributes.setEnabled(false);
-        m_jDisplay.setEnabled(false);        
+        m_jDisplay.setEnabled(false);
         m_jVprice.setEnabled(false);
-        m_jVerpatrib.setEnabled(false);  
-        m_jTextTip.setEnabled(false); 
+        m_jVerpatrib.setEnabled(false);
+        m_jTextTip.setEnabled(false);
         m_jCheckWarrantyReceipt.setEnabled(false);
-	m_jStockUnits.setVisible(false);       
+        m_jStockUnits.setVisible(false);
 
-        m_jInCatalog.setEnabled(false);                
+        m_jInCatalog.setEnabled(false);
         m_jCatalogOrder.setEnabled(false);
 
         m_jPriceSellTax.setEnabled(false);
@@ -259,18 +260,18 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jImage.setImage(null);
         m_jComment.setSelected(false);
         m_jScale.setSelected(false);
-	m_jKitchen.setSelected(false);
-	m_jPrintKB.setSelected(false);
-	m_jSendStatus.setSelected(false);        
-	m_jService.setSelected(false);
+        m_jKitchen.setSelected(false);
+        m_jPrintKB.setSelected(false);
+        m_jSendStatus.setSelected(false);
+        m_jService.setSelected(false);
         txtAttributes.setText(null);
-        m_jDisplay.setText(null);        
+        m_jDisplay.setText(null);
         m_jVprice.setSelected(false);
-        m_jVerpatrib.setSelected(false);        
-        m_jTextTip.setText(null);       
-        m_jCheckWarrantyReceipt.setSelected(false); 
-	m_jStockUnits.setVisible(false);       
-        
+        m_jVerpatrib.setSelected(false);
+        m_jTextTip.setText(null);
+        m_jCheckWarrantyReceipt.setSelected(false);
+        m_jStockUnits.setVisible(false);
+
         m_jInCatalog.setSelected(true);
         m_jCatalogOrder.setText(null);
 
@@ -290,30 +291,30 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jImage.setEnabled(true);
         m_jComment.setEnabled(true);
         m_jScale.setEnabled(true);
-	m_jKitchen.setEnabled(true);
-	m_jPrintKB.setVisible(false);
-	m_jSendStatus.setVisible(false);
-	m_jService.setEnabled(true);        
+        m_jKitchen.setEnabled(true);
+        m_jPrintKB.setVisible(false);
+        m_jSendStatus.setVisible(false);
+        m_jService.setEnabled(true);
         txtAttributes.setEnabled(true);
         m_jDisplay.setEnabled(true);
         m_jVprice.setEnabled(true);
-        m_jVerpatrib.setEnabled(true);         
+        m_jVerpatrib.setEnabled(true);
         m_jTextTip.setEnabled(true);
         m_jCheckWarrantyReceipt.setEnabled(true);
-	m_jStockUnits.setVisible(false);         
+        m_jStockUnits.setVisible(false);
 
         m_jPriceSellTax.setEnabled(true);
         m_jmargin.setEnabled(true);
 
         m_jInCatalog.setEnabled(true);
         m_jCatalogOrder.setEnabled(false);
-        
+
         calculateMargin();
         calculatePriceSellTax();
         calculateGP();
-   }
-    
-/**
+    }
+
+    /**
      *
      * @return myprod
      * @throws BasicException
@@ -337,25 +338,24 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         myprod[12] = m_jImage.getImage();
         myprod[13] = m_jComment.isSelected();
         myprod[14] = m_jScale.isSelected();
-	myprod[15] = m_jKitchen.isSelected();
-	myprod[16] = m_jPrintKB.isSelected();
+        myprod[15] = m_jKitchen.isSelected();
+        myprod[16] = m_jPrintKB.isSelected();
         myprod[17] = m_jSendStatus.isSelected();
-        myprod[18] = m_jService.isSelected();        
+        myprod[18] = m_jService.isSelected();
         myprod[19] = Formats.BYTEA.parseValue(txtAttributes.getText());
-        myprod[20] = m_jDisplay.getText();        
-	myprod[21] = m_jVprice.isSelected();  
+        myprod[20] = m_jDisplay.getText();
+        myprod[21] = m_jVprice.isSelected();
         myprod[22] = m_jVerpatrib.isSelected();
         myprod[23] = m_jTextTip.getText();
-        myprod[24] = m_jCheckWarrantyReceipt.isSelected();   
-        myprod[25] = Formats.DOUBLE.parseValue(m_jStockUnits.getText());               
+        myprod[24] = m_jCheckWarrantyReceipt.isSelected();
+        myprod[25] = Formats.DOUBLE.parseValue(m_jStockUnits.getText());
 
         myprod[26] = m_jInCatalog.isSelected();
         myprod[27] = Formats.INT.parseValue(m_jCatalogOrder.getText());
 
-        return myprod;        
-    
-    }
+        return myprod;
 
+    }
 
     /**
      *
@@ -366,8 +366,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
         reportlock = true;
         Object[] myprod = (Object[]) value;
-        m_jTitle.setText(Formats.STRING.formatValue(myprod[1]) 
-                + " - " 
+        m_jTitle.setText(Formats.STRING.formatValue(myprod[1])
+                + " - "
                 + Formats.STRING.formatValue(myprod[4]));
         m_id = myprod[0];
         m_jRef.setText(Formats.STRING.formatValue(myprod[1]));
@@ -381,24 +381,24 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         attmodel.setSelectedKey(myprod[9]);
         m_jstockcost.setText(Formats.CURRENCY.formatValue(myprod[10]));
         m_jstockvolume.setText(Formats.DOUBLE.formatValue(myprod[11]));
-        m_jImage.setImage((BufferedImage) myprod[12]);        
-        m_jComment.setSelected(((Boolean)myprod[13]));
-        m_jScale.setSelected(((Boolean)myprod[14]));
-	m_jKitchen.setSelected(((Boolean)myprod[15]));
-        m_jPrintKB.setSelected(((Boolean)myprod[16]));
-        m_jSendStatus.setSelected(((Boolean)myprod[17]));        
-	m_jService.setSelected(((Boolean)myprod[18]));
-        txtAttributes.setText(Formats.BYTEA.formatValue(myprod[19]));        
+        m_jImage.setImage((BufferedImage) myprod[12]);
+        m_jComment.setSelected(((Boolean) myprod[13]));
+        m_jScale.setSelected(((Boolean) myprod[14]));
+        m_jKitchen.setSelected(((Boolean) myprod[15]));
+        m_jPrintKB.setSelected(((Boolean) myprod[16]));
+        m_jSendStatus.setSelected(((Boolean) myprod[17]));
+        m_jService.setSelected(((Boolean) myprod[18]));
+        txtAttributes.setText(Formats.BYTEA.formatValue(myprod[19]));
         m_jDisplay.setText(Formats.STRING.formatValue(myprod[20]));
-        m_jVprice.setSelected(((Boolean)myprod[21]));
-        m_jVerpatrib.setSelected(((Boolean)myprod[22]));
+        m_jVprice.setSelected(((Boolean) myprod[21]));
+        m_jVerpatrib.setSelected(((Boolean) myprod[22]));
         m_jTextTip.setText(Formats.STRING.formatValue(myprod[23]));
-        m_jCheckWarrantyReceipt.setSelected(((Boolean)myprod[24]));
-        m_jStockUnits.setText(Formats.DOUBLE.formatValue(0.0));       
-        
-        m_jInCatalog.setSelected(((Boolean)myprod[26]));
+        m_jCheckWarrantyReceipt.setSelected(((Boolean) myprod[24]));
+        m_jStockUnits.setText(Formats.DOUBLE.formatValue(0.0));
+
+        m_jInCatalog.setSelected(((Boolean) myprod[26]));
         m_jCatalogOrder.setText(Formats.INT.formatValue(myprod[27]));
-        
+
         txtAttributes.setCaretPosition(0);
 
         reportlock = false;
@@ -417,30 +417,30 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jImage.setEnabled(true);
         m_jComment.setEnabled(true);
         m_jScale.setEnabled(true);
-	m_jKitchen.setEnabled(true);
-	m_jPrintKB.setVisible(false);      
-	m_jSendStatus.setVisible(false);        
-	m_jService.setEnabled(true);
+        m_jKitchen.setEnabled(true);
+        m_jPrintKB.setVisible(false);
+        m_jSendStatus.setVisible(false);
+        m_jService.setEnabled(true);
         txtAttributes.setEnabled(true);
         m_jDisplay.setEnabled(true);
         m_jSendStatus.setEnabled(true);
         m_jVerpatrib.setEnabled(true);
         m_jTextTip.setEnabled(true);
-        m_jCheckWarrantyReceipt.setEnabled(true);       
- 	m_jStockUnits.setVisible(false);        
+        m_jCheckWarrantyReceipt.setEnabled(true);
+        m_jStockUnits.setVisible(false);
 
         m_jInCatalog.setEnabled(true);
         m_jCatalogOrder.setEnabled(m_jInCatalog.isSelected());
-        
+
         m_jPriceSellTax.setEnabled(true);
         m_jmargin.setEnabled(true);
-        
-        setButtonHTML();        
+
+        setButtonHTML();
         calculateMargin();
         calculatePriceSellTax();
-        calculateGP();        
+        calculateGP();
     }
-    
+
     /**
      *
      * @param value
@@ -450,8 +450,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
         reportlock = true;
         Object[] myprod = (Object[]) value;
-        m_jTitle.setText(Formats.STRING.formatValue(myprod[1]) 
-                + " - " + Formats.STRING.formatValue(myprod[4]) 
+        m_jTitle.setText(Formats.STRING.formatValue(myprod[1])
+                + " - " + Formats.STRING.formatValue(myprod[4])
                 + " " + AppLocal.getIntString("label.recorddeleted"));
         m_id = myprod[0];
         m_jRef.setText(Formats.STRING.formatValue(myprod[1]));
@@ -466,25 +466,25 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jstockcost.setText(Formats.CURRENCY.formatValue(myprod[10]));
         m_jstockvolume.setText(Formats.DOUBLE.formatValue(myprod[11]));
         m_jImage.setImage((BufferedImage) myprod[12]);
-        m_jComment.setSelected(((Boolean)myprod[13]));
-        m_jScale.setSelected(((Boolean)myprod[14]));
-	m_jKitchen.setSelected(((Boolean)myprod[15]));
-	m_jPrintKB.setSelected(((Boolean)myprod[16]));
-	m_jSendStatus.setSelected(((Boolean)myprod[17]));
-        m_jService.setSelected(((Boolean)myprod[18]));
-        txtAttributes.setText(Formats.BYTEA.formatValue(myprod[19]));        
-        m_jDisplay.setText(Formats.STRING.formatValue(myprod[20]));        
-        m_jVprice.setSelected(((Boolean)myprod[21]));
-        m_jVerpatrib.setSelected(((Boolean)myprod[22])); 
-        m_jTextTip.setText(Formats.STRING.formatValue(myprod[23])); 
-        m_jCheckWarrantyReceipt.setSelected(((Boolean)myprod[24]));
-        m_jStockUnits.setText(Formats.DOUBLE.formatValue(myprod[25]));        
- 
-        m_jInCatalog.setSelected(((Boolean)myprod[26]));
+        m_jComment.setSelected(((Boolean) myprod[13]));
+        m_jScale.setSelected(((Boolean) myprod[14]));
+        m_jKitchen.setSelected(((Boolean) myprod[15]));
+        m_jPrintKB.setSelected(((Boolean) myprod[16]));
+        m_jSendStatus.setSelected(((Boolean) myprod[17]));
+        m_jService.setSelected(((Boolean) myprod[18]));
+        txtAttributes.setText(Formats.BYTEA.formatValue(myprod[19]));
+        m_jDisplay.setText(Formats.STRING.formatValue(myprod[20]));
+        m_jVprice.setSelected(((Boolean) myprod[21]));
+        m_jVerpatrib.setSelected(((Boolean) myprod[22]));
+        m_jTextTip.setText(Formats.STRING.formatValue(myprod[23]));
+        m_jCheckWarrantyReceipt.setSelected(((Boolean) myprod[24]));
+        m_jStockUnits.setText(Formats.DOUBLE.formatValue(myprod[25]));
+
+        m_jInCatalog.setSelected(((Boolean) myprod[26]));
         m_jCatalogOrder.setText(Formats.INT.formatValue(myprod[27]));
 
         txtAttributes.setCaretPosition(0);
-        
+
         reportlock = false;
 
         m_jRef.setEnabled(false);
@@ -504,26 +504,26 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jKitchen.setEnabled(false);
         m_jPrintKB.setVisible(false);
         m_jSendStatus.setVisible(false);
-	m_jService.setEnabled(true);
+        m_jService.setEnabled(true);
         txtAttributes.setEnabled(false);
-        m_jDisplay.setEnabled(false);        
+        m_jDisplay.setEnabled(false);
         m_jVprice.setEnabled(false);
         m_jVerpatrib.setEnabled(false);
         m_jTextTip.setEnabled(false);
-        m_jCheckWarrantyReceipt.setEnabled(false);          
-	m_jStockUnits.setVisible(false);         
+        m_jCheckWarrantyReceipt.setEnabled(false);
+        m_jStockUnits.setVisible(false);
 
         m_jInCatalog.setEnabled(false);
         m_jCatalogOrder.setEnabled(false);
-        
+
         m_jPriceSellTax.setEnabled(false);
         m_jmargin.setEnabled(false);
-        
+
         calculateMargin();
         calculatePriceSellTax();
         calculateGP();
     }
-    
+
     /**
      *
      * @return this
@@ -534,18 +534,19 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     }
 
     private void setCode() {
-        
-        Long lDateTime= new Date().getTime(); // USED FOR RANDOM CODE DETAILS
-        
+
+        Long lDateTime = new Date().getTime(); // USED FOR RANDOM CODE DETAILS
+
         if (!reportlock) {
             reportlock = true;
-            
+
             if (m_jRef == null) {
                 //m_jCode.setText("0123456789012");
                 m_jCode.setText(Long.toString(lDateTime));
             } else {
-                if (m_jCode.getText()==null || "".equals(m_jCode.getText())){
-                m_jCode.setText(m_jRef.getText());}
+                if (m_jCode.getText() == null || "".equals(m_jCode.getText())) {
+                    m_jCode.setText(m_jRef.getText());
+                }
             }
             reportlock = false;
         }
@@ -553,9 +554,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
 // ADDED JG 19 NOV 12 - AUTOFILL BUTTON 
 // AMENDED JDL 11 MAY 12 - STOP AUTOFILL IF FIELD ALREADY EXSISTS   
-    
     private void setDisplay() {
-    
+
         String str = (m_jName.getText());
         int length = str.length();
 
@@ -563,17 +563,19 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             reportlock = true;
 
             if (length == 0) {
-                m_jDisplay.setText(m_jName.getText());                
+                m_jDisplay.setText(m_jName.getText());
             } else {
-                if (m_jDisplay.getText()==null || "".equals(m_jDisplay.getText())){
-                m_jDisplay.setText("<html>" + m_jName.getText());}    
+                if (m_jDisplay.getText() == null || "".equals(m_jDisplay.getText())) {
+                    m_jDisplay.setText("<html>" + m_jName.getText());
+                }
             }
             reportlock = false;
         }
-        }
+    }
 // ADDED JG 20 Jul 13 - AUTOFILL HTML BUTTON 
+
     private void setButtonHTML() {
-    
+
         String str = (m_jDisplay.getText());
         int length = str.length();
 
@@ -587,9 +589,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
             reportlock = false;
         }
-    }  
+    }
 
-    
     private void calculateMargin() {
 
         if (!reportlock) {
@@ -635,13 +636,12 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             if (dPriceBuy == null || dPriceSell == null) {
                 m_jGrossProfit.setText(null);
             } else {
-                m_jGrossProfit.setText(Formats.PERCENT.formatValue((dPriceSell - dPriceBuy)/dPriceSell));
+                m_jGrossProfit.setText(Formats.PERCENT.formatValue((dPriceSell - dPriceBuy) / dPriceSell));
             }
             reportlock = false;
         }
     }
-    
-    
+
     private void calculatePriceSellfromMargin() {
 
         if (!reportlock) {
@@ -679,7 +679,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         }
     }
 
-    
     private void setPriceSell(Object value) {
 
         if (!priceselllock) {
@@ -691,6 +690,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     }
 
     private class PriceSellManager implements DocumentListener {
+
         @Override
         public void changedUpdate(DocumentEvent e) {
             if (!priceselllock) {
@@ -700,8 +700,9 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
+
         @Override
         public void insertUpdate(DocumentEvent e) {
             if (!priceselllock) {
@@ -711,8 +712,9 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
+
         @Override
         public void removeUpdate(DocumentEvent e) {
             if (!priceselllock) {
@@ -722,77 +724,87 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
     }
 
     private class FieldsManager implements DocumentListener, ActionListener {
+
         @Override
         public void changedUpdate(DocumentEvent e) {
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();           
-            
+            calculateGP();
+
         }
+
         @Override
         public void insertUpdate(DocumentEvent e) {
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
+
         @Override
         public void removeUpdate(DocumentEvent e) {
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             calculateMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
     }
 
     private class PriceTaxManager implements DocumentListener {
+
         @Override
         public void changedUpdate(DocumentEvent e) {
             calculatePriceSellfromPST();
             calculateMargin();
-            calculateGP();            
+            calculateGP();
         }
+
         @Override
         public void insertUpdate(DocumentEvent e) {
             calculatePriceSellfromPST();
             calculateMargin();
-            calculateGP();            
+            calculateGP();
         }
+
         @Override
         public void removeUpdate(DocumentEvent e) {
             calculatePriceSellfromPST();
             calculateMargin();
-            calculateGP();            
+            calculateGP();
         }
     }
 
-    private class MarginManager implements DocumentListener  {
+    private class MarginManager implements DocumentListener {
+
         @Override
         public void changedUpdate(DocumentEvent e) {
             calculatePriceSellfromMargin();
             calculatePriceSellTax();
             calculateGP();
         }
+
         @Override
         public void insertUpdate(DocumentEvent e) {
             calculatePriceSellfromMargin();
             calculatePriceSellTax();
             calculateGP();
         }
+
         @Override
         public void removeUpdate(DocumentEvent e) {
             calculatePriceSellfromMargin();
             calculatePriceSellTax();
-            calculateGP();            
+            calculateGP();
         }
     }
 
@@ -812,10 +824,10 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         }
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -852,6 +864,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jCheckWarrantyReceipt = new javax.swing.JCheckBox();
         m_jGrossProfit = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
+        m_jCopyRef = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         m_jstockcost = new javax.swing.JTextField();
@@ -918,6 +931,16 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jRef.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 m_jRefFocusLost(evt);
+            }
+        });
+        m_jRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_jRefActionPerformed(evt);
+            }
+        });
+        m_jRef.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                m_jRefKeyReleased(evt);
             }
         });
         jPanel1.add(m_jRef);
@@ -1082,6 +1105,19 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jPanel1.add(jLabel22);
         jLabel22.setBounds(370, 220, 90, 20);
 
+        m_jCopyRef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        m_jCopyRef.setSelected(true);
+        m_jCopyRef.setText(bundle.getString("label.copyref")); // NOI18N
+        m_jCopyRef.setToolTipText("");
+        m_jCopyRef.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        m_jCopyRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_jCopyRefActionPerformed(evt);
+            }
+        });
+        jPanel1.add(m_jCopyRef);
+        m_jCopyRef.setBounds(280, 10, 130, 23);
+
         jTabbedPane1.addTab(AppLocal.getIntString("label.prodgeneral"), jPanel1); // NOI18N
 
         jPanel2.setLayout(null);
@@ -1245,7 +1281,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jPanel4.add(jLabel17);
         jLabel17.setBounds(10, 200, 330, 100);
         jPanel4.add(jSeparator1);
-        jSeparator1.setBounds(150, 300, 0, 2);
+        jSeparator1.setBounds(150, 300, 0, 12);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -1348,12 +1384,12 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_jInCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jInCatalogActionPerformed
- 
+
         if (m_jInCatalog.isSelected()) {
-            m_jCatalogOrder.setEnabled(true);   
+            m_jCatalogOrder.setEnabled(true);
         } else {
-            m_jCatalogOrder.setEnabled(false);   
-            m_jCatalogOrder.setText(null);   
+            m_jCatalogOrder.setEnabled(false);
+            m_jCatalogOrder.setText(null);
         }
 
     }//GEN-LAST:event_m_jInCatalogActionPerformed
@@ -1393,12 +1429,25 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     }//GEN-LAST:event_jButtonHTMLActionPerformed
 
     private void jLabel32MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseDragged
- // TODO for later
+        // TODO for later
     }//GEN-LAST:event_jLabel32MouseDragged
 
     private void m_jCodetypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jCodetypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_m_jCodetypeActionPerformed
+
+    private void m_jCopyRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jCopyRefActionPerformed
+    }//GEN-LAST:event_m_jCopyRefActionPerformed
+
+    private void m_jRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jRefActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_jRefActionPerformed
+
+    private void m_jRefKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m_jRefKeyReleased
+        if (m_jCopyRef.isSelected()) {
+            m_jCode.setText(m_jRef.getText());
+        }
+    }//GEN-LAST:event_m_jRefKeyReleased
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1451,6 +1500,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     private javax.swing.JTextField m_jCode;
     private javax.swing.JComboBox m_jCodetype;
     private javax.swing.JCheckBox m_jComment;
+    private javax.swing.JCheckBox m_jCopyRef;
     private javax.swing.JTextPane m_jDisplay;
     private javax.swing.JTextField m_jGrossProfit;
     private com.openbravo.data.gui.JImageEditor m_jImage;
@@ -1476,5 +1526,5 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     private javax.swing.JTextField m_jstockvolume;
     private javax.swing.JTextArea txtAttributes;
     // End of variables declaration//GEN-END:variables
-    
+
 }
