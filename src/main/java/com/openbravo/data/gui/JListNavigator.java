@@ -127,10 +127,12 @@ public class JListNavigator extends javax.swing.JPanel implements BrowseListener
         jScrollPane1 = new javax.swing.JScrollPane();
         m_jlist = new javax.swing.JList();
 
-        setPreferredSize(new java.awt.Dimension(200, 2));
+        setPreferredSize(new java.awt.Dimension(380, 2));
         setLayout(new java.awt.BorderLayout());
 
-        m_jlist.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(380, 132));
+
+        m_jlist.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         m_jlist.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         m_jlist.setFocusable(false);
         m_jlist.setRequestFocusEnabled(false);
