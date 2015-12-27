@@ -7,6 +7,7 @@ package com.openbravo.pos.payment;
 
 import com.openbravo.pos.customers.CustomerInfoExt;
 import com.openbravo.pos.forms.AppView;
+import java.awt.BorderLayout;
 import java.awt.Component;
 
 /**
@@ -14,13 +15,18 @@ import java.awt.Component;
  * @author highway
  */
 public class JPaymentWireless extends javax.swing.JPanel implements JPaymentInterface {
-
+    private PaymentPanel m_paymentPanel;
+    
     /**
      * Creates new form JPaymentWireless
      */
-    public JPaymentWireless(JPaymentNotifier app) {
+    public JPaymentWireless(JPaymentNotifier notifier) {
         initComponents();
         
+        // reuse magcard-dummy, as long as no actual providers/devices are implemented
+        m_paymentPanel = PaymentPanelFac.getPaymentPanel("not defined", notifier);
+        add(m_paymentPanel.getComponent(), BorderLayout.CENTER);
+            jLabel1.setText(null);
         // no providers have been implemented yet
     }
 
@@ -69,7 +75,7 @@ public class JPaymentWireless extends javax.swing.JPanel implements JPaymentInte
 
     @Override
     public void activate(CustomerInfoExt customerext, double dTotal, String transactionID) {
-        
+        m_paymentPanel.activate(transactionID, dTotal);
     }
 
     @Override
