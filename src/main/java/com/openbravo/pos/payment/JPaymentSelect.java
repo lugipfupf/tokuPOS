@@ -722,26 +722,26 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         }
     }
     
-    public class JPaymentWirelessCreator implements JPaymentCreator {
+    public class JPaymentContactlessCreator implements JPaymentCreator {
 
         @Override
         public JPaymentInterface createJPayment() {
-            return new JPaymentWireless(JPaymentSelect.this);
+            return new JPaymentContactless(JPaymentSelect.this);
         }
 
         @Override
         public String getKey() {
-            return "payment.wireless";
+            return "payment.contactless";
         }
 
         @Override
         public String getLabelKey() {
-            return "tab.wireless";
+            return "tab.contactless";
         }
 
         @Override
         public String getIconKey() {
-            return "/com/openbravo/images/wireless.png";
+            return "/com/openbravo/images/contactless.png";
         }
         
     }

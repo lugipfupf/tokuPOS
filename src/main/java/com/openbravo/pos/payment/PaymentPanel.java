@@ -45,4 +45,6 @@ public interface PaymentPanel {
      * @return
      */
     public PaymentInfoMagcard getPaymentInfoMagcard();
+    
+    public PaymentInfoContactless getPaymentInfoContactless();
 }

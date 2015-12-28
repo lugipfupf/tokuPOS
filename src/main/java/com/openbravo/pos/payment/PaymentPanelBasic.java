@@ -96,7 +96,15 @@ public class PaymentPanelBasic extends javax.swing.JPanel implements PaymentPane
                     m_sTransactionID,
                     m_dTotal);
         }
-    } 
+    }
+    
+    public PaymentInfoContactless getPaymentInfoContactless() {
+        // not exactly elegant
+        return new PaymentInfoContactless(
+                m_sTransactionID,
+                m_dTotal
+        );
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.

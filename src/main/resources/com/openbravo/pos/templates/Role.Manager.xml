@@ -54,7 +54,7 @@
     <class name="payment.magcard"/>
     <class name="payment.free"/>
     <class name="payment.debt"/>
-    <class name="payment.wireless" />
+    <class name="payment.contactless" />
     <class name="refund.cash"/>
     <class name="refund.cheque"/>
     <class name="refund.paper"/>

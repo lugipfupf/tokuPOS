@@ -116,7 +116,15 @@ public class PaymentPanelType extends javax.swing.JPanel implements PaymentPanel
                     m_sTransactionID,
                     m_dTotal);
         }
-    }    
+    }  
+    
+    public PaymentInfoContactless getPaymentInfoContactless() {
+        // not exactly elegant
+        return new PaymentInfoContactless(
+                m_sTransactionID,
+                m_dTotal
+        );
+    }  
     
     private class RecalculateName implements PropertyChangeListener {
         @Override

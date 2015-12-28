@@ -72,7 +72,7 @@ public class JPaymentSelectReceipt extends JPaymentSelect {
         addTabPayment(new JPaymentSelect.JPaymentDebtCreator());
 // JG Added 1 Dec 13 
         addTabPayment(new JPaymentSelect.JPaymentBankCreator());       
-        addTabPayment(new JPaymentSelect.JPaymentWirelessCreator()); 
+        addTabPayment(new JPaymentSelect.JPaymentContactlessCreator()); 
         setHeaderVisible(true);
     }
     

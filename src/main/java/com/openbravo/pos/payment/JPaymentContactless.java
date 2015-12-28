@@ -14,13 +14,13 @@ import java.awt.Component;
  *
  * @author highway
  */
-public class JPaymentWireless extends javax.swing.JPanel implements JPaymentInterface {
+public class JPaymentContactless extends javax.swing.JPanel implements JPaymentInterface {
     private PaymentPanel m_paymentPanel;
     
     /**
-     * Creates new form JPaymentWireless
+     * Creates new form JPaymentContactless
      */
-    public JPaymentWireless(JPaymentNotifier notifier) {
+    public JPaymentContactless(JPaymentNotifier notifier) {
         initComponents();
         
         // reuse magcard-dummy, as long as no actual providers/devices are implemented
@@ -80,7 +80,7 @@ public class JPaymentWireless extends javax.swing.JPanel implements JPaymentInte
 
     @Override
     public PaymentInfo executePayment() {
-        return null;
+        return m_paymentPanel.getPaymentInfoContactless();
     }
 
     @Override

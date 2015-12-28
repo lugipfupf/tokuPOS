@@ -135,6 +135,14 @@ public class PaymentPanelMagCard extends javax.swing.JPanel implements PaymentPa
         }
     } 
     
+    public PaymentInfoContactless getPaymentInfoContactless() {
+        // not exactly elegant
+        return new PaymentInfoContactless(
+                m_sTransactionID,
+                m_dTotal
+        );
+    }
+    
     private void stateTransition(char cTrans) {
         
         m_cardreader.appendChar(cTrans);
