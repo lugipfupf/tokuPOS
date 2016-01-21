@@ -431,6 +431,11 @@
                                     <filtering>false</filtering>
                                 </resource>
                                 <resource>
+                                    <targetPath>${basedir}/target/Reports/ch</targetPath>
+                                    <directory>${basedir}/src/main/resources/ch</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
                                     <targetPath>${basedir}/target/locales</targetPath>
                                     <directory>${basedir}/src/main/resources</directory>
                                     <filtering>false</filtering>

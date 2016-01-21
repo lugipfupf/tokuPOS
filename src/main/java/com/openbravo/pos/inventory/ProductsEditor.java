@@ -246,72 +246,13 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jTitle.setText(AppLocal.getIntString("label.recordnew"));
 
         m_id = UUID.randomUUID().toString();
-        m_jRef.setText(null);
-        m_jCode.setText(null);
-        m_jCodetype.setSelectedIndex(0);
-        m_jName.setText(null);
-        m_jPriceBuy.setText(null);
-        setPriceSell(null);
-        m_CategoryModel.setSelectedKey(null);
-        taxcatmodel.setSelectedKey(null);
-        attmodel.setSelectedKey(null);
-        m_jstockcost.setText("0.0");
-        m_jstockvolume.setText("0.0");
-        m_jImage.setImage(null);
-        m_jComment.setSelected(false);
-        m_jScale.setSelected(false);
-        m_jKitchen.setSelected(false);
-        m_jPrintKB.setSelected(false);
-        m_jSendStatus.setSelected(false);
-        m_jService.setSelected(false);
-        txtAttributes.setText(null);
-        m_jDisplay.setText(null);
-        m_jVprice.setSelected(false);
-        m_jVerpatrib.setSelected(false);
-        m_jTextTip.setText(null);
-        m_jCheckWarrantyReceipt.setSelected(false);
-        m_jStockUnits.setVisible(false);
-
-        m_jInCatalog.setSelected(true);
-        m_jCatalogOrder.setText(null);
+        m_jRef.setText("*" + m_jRef.getText());
+        m_jCode.setText("*" + m_jCode.getText());
+        // leave the rest as is. many customers complained that, if they have to enter
+        // a lot of similar products, they always had to start over, which is quite annoying
 
         reportlock = false;
 
-        m_jRef.setEnabled(true);
-        m_jCode.setEnabled(true);
-        m_jCodetype.setEnabled(true);
-        m_jName.setEnabled(true);
-        m_jPriceBuy.setEnabled(true);
-        m_jPriceSell.setEnabled(true);
-        m_jCategory.setEnabled(true);
-        m_jTax.setEnabled(true);
-        m_jAtt.setEnabled(true);
-        m_jstockcost.setEnabled(true);
-        m_jstockvolume.setEnabled(true);
-        m_jImage.setEnabled(true);
-        m_jComment.setEnabled(true);
-        m_jScale.setEnabled(true);
-        m_jKitchen.setEnabled(true);
-        m_jPrintKB.setVisible(false);
-        m_jSendStatus.setVisible(false);
-        m_jService.setEnabled(true);
-        txtAttributes.setEnabled(true);
-        m_jDisplay.setEnabled(true);
-        m_jVprice.setEnabled(true);
-        m_jVerpatrib.setEnabled(true);
-        m_jTextTip.setEnabled(true);
-        m_jCheckWarrantyReceipt.setEnabled(true);
-        m_jStockUnits.setVisible(false);
-
-        m_jPriceSellTax.setEnabled(true);
-        m_jmargin.setEnabled(true);
-
-        m_jInCatalog.setEnabled(true);
-        m_jCatalogOrder.setEnabled(false);
-
-        calculateMargin();
-        calculatePriceSellTax();
-        calculateGP();
     }
 
     /**
@@ -911,12 +852,11 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
         jLabel27.setText("jLabel27");
 
-        setLayout(null);
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         m_jTitle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        m_jTitle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        m_jTitle.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         add(m_jTitle);
-        m_jTitle.setBounds(310, 0, 240, 20);
 
         jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -944,7 +884,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
         });
         jPanel1.add(m_jRef);
-        m_jRef.setBounds(130, 10, 80, 25);
+        m_jRef.setBounds(130, 10, 140, 25);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText(AppLocal.getIntString("label.prodbarcode")); // NOI18N
@@ -1380,7 +1320,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jTabbedPane1.addTab(AppLocal.getIntString("label.properties"), jPanel3); // NOI18N
 
         add(jTabbedPane1);
-        jTabbedPane1.setBounds(10, 0, 560, 370);
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_jInCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jInCatalogActionPerformed

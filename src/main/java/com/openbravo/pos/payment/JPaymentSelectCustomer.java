@@ -65,10 +65,10 @@ public class JPaymentSelectCustomer extends JPaymentSelect {
     protected void addTabs() {
 // Bank Payment Receipt - Thanks Steve Clough! August 2011
         addTabPayment(new JPaymentSelect.JPaymentCashCreator());
-        addTabPayment(new JPaymentSelect.JPaymentChequeCreator());
-        addTabPayment(new JPaymentSelect.JPaymentPaperCreator());
-        addTabPayment(new JPaymentSelect.JPaymentBankCreator());
         addTabPayment(new JPaymentSelect.JPaymentMagcardCreator());
+        addTabPayment(new JPaymentSelect.JPaymentPaperCreator());
+        addTabPayment(new JPaymentSelect.JPaymentChequeCreator());
+        addTabPayment(new JPaymentSelect.JPaymentBankCreator());
         addTabPayment(new JPaymentSelect.JPaymentContactlessCreator());
         setHeaderVisible(true);
     }
