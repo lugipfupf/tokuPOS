@@ -43,6 +43,8 @@ import javax.swing.event.DocumentListener;
  */
 public final class ProductsEditor extends JPanel implements EditorRecord {
 
+    private static final String BUTTON_PREFIX = "<html>";
+
     private final SentenceList m_sentcat;
     private ComboBoxValModel m_CategoryModel;
 
@@ -248,6 +250,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_id = UUID.randomUUID().toString();
         m_jRef.setText("*" + m_jRef.getText());
         m_jCode.setText("*" + m_jCode.getText());
+        m_jDisplay.setText(null);
         // leave the rest as is. many customers complained that, if they have to enter
         // a lot of similar products, they always had to start over, which is quite annoying
 
@@ -493,8 +496,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         }
     }
 
-// ADDED JG 19 NOV 12 - AUTOFILL BUTTON 
-// AMENDED JDL 11 MAY 12 - STOP AUTOFILL IF FIELD ALREADY EXSISTS   
     private void setDisplay() {
 
         String str = (m_jName.getText());
@@ -506,15 +507,12 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             if (length == 0) {
                 m_jDisplay.setText(m_jName.getText());
             } else {
-                if (m_jDisplay.getText() == null || "".equals(m_jDisplay.getText())) {
-                    m_jDisplay.setText("<html>" + m_jName.getText());
-                }
+                m_jDisplay.setText(BUTTON_PREFIX + m_jName.getText());
             }
             reportlock = false;
         }
     }
-// ADDED JG 20 Jul 13 - AUTOFILL HTML BUTTON 
-
+    
     private void setButtonHTML() {
 
         String str = (m_jDisplay.getText());
@@ -914,6 +912,11 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 m_jNameFocusLost(evt);
+            }
+        });
+        m_jName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m_jNameKeyTyped(evt);
             }
         });
         jPanel1.add(m_jName);
@@ -1346,11 +1349,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         setCode();
     }//GEN-LAST:event_m_jRefFocusLost
 
-    private void m_jNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_jNameFocusLost
-// ADDED JG 19 NOV 12 - AUTOFILL
-        setDisplay();
-    }//GEN-LAST:event_m_jNameFocusLost
-
     private void none(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_none
 
     }//GEN-LAST:event_none
@@ -1387,6 +1385,16 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             m_jCode.setText(m_jRef.getText());
         }
     }//GEN-LAST:event_m_jRefKeyReleased
+
+    private void m_jNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m_jNameKeyTyped
+        setDisplay();
+    }//GEN-LAST:event_m_jNameKeyTyped
+
+    private void m_jNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_jNameFocusLost
+        if (!m_jDisplay.getText().equals(BUTTON_PREFIX + m_jName.getText())) {
+            setDisplay();
+        }
+    }//GEN-LAST:event_m_jNameFocusLost
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
