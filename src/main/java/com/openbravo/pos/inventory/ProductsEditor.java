@@ -37,10 +37,6 @@ import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-/**
- *
- * @author adrianromero
- */
 public final class ProductsEditor extends JPanel implements EditorRecord {
 
     private static final String BUTTON_PREFIX = "<html>";
@@ -63,16 +59,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
     private boolean reportlock = false;
 
-// JG Mar 14 - Preparing for direct Printer assign rather than script
-//    private Object m_Printkb; - use this for printernumber
-//    private Object m_Sendstatus; - use this for sent y/n or resend
-//    private Object m_Lineorder; - shuffle ticketlines into group (starters, mains etc)
-    /**
-     * Creates new form JEditProduct
-     *
-     * @param dlSales
-     * @param dirty
-     */
     public ProductsEditor(DataLogicSales dlSales, DirtyManager dirty) {
         initComponents();
 
@@ -120,7 +106,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jInCatalog.addActionListener(dirty);
         m_jCatalogOrder.getDocument().addDocumentListener(dirty);
 
-// Auto-calc fields listeners 
+        // Auto-calc fields listeners 
         FieldsManager fm = new FieldsManager();
         m_jPriceBuy.getDocument().addDocumentListener(fm);
         m_jPriceSell.getDocument().addDocumentListener(new PriceSellManager());
@@ -132,10 +118,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         writeValueEOF();
     }
 
-    /**
-     *
-     * @throws BasicException
-     */
     public void activate() throws BasicException {
 
         // Load the taxes logic
@@ -152,16 +134,10 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jAtt.setModel(attmodel);
     }
 
-    /**
-     *
-     */
     @Override
     public void refresh() {
     }
 
-    /**
-     *
-     */
     @Override
     public void writeValueEOF() {
 
@@ -237,9 +213,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         calculateGP();
     }
 
-    /**
-     *
-     */
     @Override
     public void writeValueInsert() {
 
@@ -260,11 +233,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
     }
 
-    /**
-     *
-     * @return myprod
-     * @throws BasicException
-     */
     @Override
     public Object createValue() throws BasicException {
 
@@ -387,10 +355,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         calculateGP();
     }
 
-    /**
-     *
-     * @param value
-     */
     @Override
     public void writeValueDelete(Object value) {
 
@@ -470,10 +434,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         calculateGP();
     }
 
-    /**
-     *
-     * @return this
-     */
     @Override
     public Component getComponent() {
         return this;
