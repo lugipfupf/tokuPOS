@@ -251,6 +251,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jRef.setText("*" + m_jRef.getText());
         m_jCode.setText("*" + m_jCode.getText());
         m_jDisplay.setText(null);
+        m_jPriceSell.setText(null);
+        m_jPriceSellTax.setText(null);
         // leave the rest as is. many customers complained that, if they have to enter
         // a lot of similar products, they always had to start over, which is quite annoying
 
