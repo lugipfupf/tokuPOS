@@ -16,37 +16,15 @@
  */
 package com.openbravo.pos.imports;
 
-import com.openbravo.data.user.EditorRecord;
-import com.openbravo.data.user.ListProvider;
-import com.openbravo.data.user.SaveProvider;
-import com.openbravo.pos.panels.JPanelTable;
+import com.openbravo.pos.panels.JPanelImporter;
+import com.unicenta.pozapps.forms.AppLocal;
 
-public class CustomersImportPanel extends JPanelTable {
-    private JFileChooserPanel jFileChooser;
-    
-    @Override
-    protected void init() {
-        this.jFileChooser = new JFileChooserPanel();
-    }
-
-    @Override
-    public EditorRecord getEditor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ListProvider getListProvider() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public SaveProvider getSaveProvider() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class CustomersImportPanel extends JPanelImporter {
 
     @Override
     public String getTitle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return AppLocal.getIntString("Menu.Import.Customers");
     }
+    
     
 }

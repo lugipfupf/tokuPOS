@@ -40,22 +40,18 @@ public class JFileChooserPanel extends javax.swing.JPanel {
         txtFile = new javax.swing.JTextField();
         btnFile = new javax.swing.JButton();
 
-        setLayout(null);
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lblFile.setText(AppLocal.getIntString("label.csvfile")); // NOI18N
         lblFile.setPreferredSize(new java.awt.Dimension(80, 36));
         add(lblFile);
-        lblFile.setBounds(0, 0, 80, 36);
 
-        txtFile.setLocation(new java.awt.Point(80, 0));
-        txtFile.setPreferredSize(new java.awt.Dimension(14, 30));
+        txtFile.setPreferredSize(new java.awt.Dimension(400, 30));
         add(txtFile);
-        txtFile.setBounds(80, 0, 480, 36);
 
         btnFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/fileopen.png"))); // NOI18N
         btnFile.setPreferredSize(new java.awt.Dimension(64, 32));
         add(btnFile);
-        btnFile.setBounds(560, 0, 64, 36);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
