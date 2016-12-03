@@ -1,7 +1,7 @@
 # Change Log
 
-## [3.92.0](https://github.com/lugipfupf/tokuPOS/compare/3.91.3...3.92.0) (2016-12-03)
-[Full Changelog](https://github.com/lugipfupf/tokuPOS/releases/tag/3.92.0)
+## [3.92.0](https://github.com/lugipfupf/tokuPOS/releases/tag/3.92.0https://github.com/lugipfupf/tokuPOS/compare/3.91.3...3.92.0) (2016-12-03)
+[Full Changelog](https://github.com/lugipfupf/tokuPOS/compare/3.91.3...3.92.0)
 
 - Ability to sync product ids with barcode text field
 - Copy values when creating a new product
