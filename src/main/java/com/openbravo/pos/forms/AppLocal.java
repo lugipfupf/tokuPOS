@@ -30,7 +30,7 @@ public class AppLocal {
     /**
      *
      */
-    public static final String APP_NAME = "uniCenta oPOS";
+    public static final String APP_NAME = "tokuPOS";
 
     /**
      *
@@ -40,7 +40,7 @@ public class AppLocal {
     /**
      *
      */
-    public static final String APP_VERSION = "3.91.3";
+    public static final String APP_VERSION = "3.92";
 
     private static final LocaleResources m_resources;
     
