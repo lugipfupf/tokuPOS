@@ -16,6 +16,8 @@
  */
 package com.openbravo.pos.imports;
 
+import com.openbravo.pos.forms.AppView;
+import com.openbravo.pos.forms.BeanFactoryException;
 import com.openbravo.pos.panels.JPanelImporter;
 import com.unicenta.pozapps.forms.AppLocal;
 
@@ -26,5 +28,11 @@ public class CustomersImportPanel extends JPanelImporter {
         return AppLocal.getIntString("Menu.Import.Customers");
     }
     
+    @Override
+    public void init(AppView app) throws BeanFactoryException {
+        super.init(app);
+        
+        this.fieldConfigurator = new JPanelCustomers();
+    }
     
 }

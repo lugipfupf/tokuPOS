@@ -21,8 +21,9 @@ import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.BeanFactoryApp;
 import com.openbravo.pos.forms.BeanFactoryException;
 import com.openbravo.pos.forms.JPanelView;
-import com.openbravo.pos.imports.JFileChooserPanel;
+import com.openbravo.pos.imports.JPanelCSVFileChooser;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 /**
  *
@@ -30,7 +31,9 @@ import javax.swing.JComponent;
  */
 public abstract class JPanelImporter extends javax.swing.JPanel implements JPanelView, BeanFactoryApp {
     protected AppView appView;
-    protected JFileChooserPanel fileChooserPanel;
+    protected JPanelCSVFileChooser fileChooserPanel;
+    
+    protected JPanel fieldConfigurator;
     
     /**
      * Creates new form JPanelImporter
@@ -42,14 +45,15 @@ public abstract class JPanelImporter extends javax.swing.JPanel implements JPane
     @Override
     public void init(AppView app) throws BeanFactoryException {
         this.appView = app;
-        this.fileChooserPanel = new JFileChooserPanel();
+        this.fileChooserPanel = new JPanelCSVFileChooser();
     }
 
     @Override
     public void activate() throws BasicException {
         this.fileChooserPanel.applyComponentOrientation(getComponentOrientation());
-        this.container.add(this.fileChooserPanel, java.awt.BorderLayout.NORTH);
-        this.fileChooserPanel.setVisible(true);
+        this.fieldConfigurator.applyComponentOrientation(getComponentOrientation());
+        this.toolbar.add(this.fileChooserPanel);
+        this.container.add(this.fieldConfigurator, java.awt.BorderLayout.CENTER);
     }
 
     @Override
@@ -77,15 +81,19 @@ public abstract class JPanelImporter extends javax.swing.JPanel implements JPane
     private void initComponents() {
 
         container = new javax.swing.JPanel();
+        toolbar = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
         container.setLayout(new java.awt.BorderLayout());
+        container.add(toolbar, java.awt.BorderLayout.NORTH);
+
         add(container, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel container;
+    private javax.swing.JPanel toolbar;
     // End of variables declaration//GEN-END:variables
 }
