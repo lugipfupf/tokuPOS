@@ -36,20 +36,26 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblFile = new javax.swing.JLabel();
         txtFile = new javax.swing.JTextField();
         btnFile = new javax.swing.JButton();
         btnRead = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblConfig = new javax.swing.JLabel();
         lblDelim = new javax.swing.JLabel();
         txtDelim = new javax.swing.JTextField();
         lblQuote = new javax.swing.JLabel();
         txtQuote = new javax.swing.JTextField();
+        lblRecordsFound = new javax.swing.JLabel();
+        txtRecordsFound = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(186, 84));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
@@ -71,7 +77,12 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
         btnRead.setPreferredSize(new java.awt.Dimension(64, 32));
         jPanel1.add(btnRead);
 
-        add(jPanel1);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/import.png"))); // NOI18N
+        jButton1.setToolTipText(AppLocal.getIntString("label.csvimpostbct")); // NOI18N
+        jButton1.setPreferredSize(new java.awt.Dimension(64, 32));
+        jPanel1.add(jButton1);
+
+        jPanel3.add(jPanel1);
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
@@ -93,20 +104,35 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
         txtQuote.setPreferredSize(new java.awt.Dimension(32, 28));
         jPanel2.add(txtQuote);
 
-        add(jPanel2);
+        lblRecordsFound.setText(AppLocal.getIntString("label.csvrecordsfound")); // NOI18N
+        jPanel2.add(lblRecordsFound);
+
+        txtRecordsFound.setEditable(false);
+        txtRecordsFound.setBackground(new java.awt.Color(204, 204, 204));
+        txtRecordsFound.setToolTipText("");
+        txtRecordsFound.setPreferredSize(new java.awt.Dimension(60, 28));
+        jPanel2.add(txtRecordsFound);
+
+        jPanel3.add(jPanel2);
+
+        add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFile;
     private javax.swing.JButton btnRead;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblConfig;
     private javax.swing.JLabel lblDelim;
     private javax.swing.JLabel lblFile;
     private javax.swing.JLabel lblQuote;
+    private javax.swing.JLabel lblRecordsFound;
     private javax.swing.JTextField txtDelim;
     private javax.swing.JTextField txtFile;
     private javax.swing.JTextField txtQuote;
+    private javax.swing.JTextField txtRecordsFound;
     // End of variables declaration//GEN-END:variables
 }

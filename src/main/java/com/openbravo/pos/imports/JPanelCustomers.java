@@ -41,293 +41,229 @@ public class JPanelCustomers extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jComboBox9 = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBox11 = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        jComboBox12 = new javax.swing.JComboBox<>();
-        jLabel13 = new javax.swing.JLabel();
-        jComboBox13 = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
-        jComboBox14 = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
-        jComboBox15 = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        jComboBox16 = new javax.swing.JComboBox<>();
-        jLabel17 = new javax.swing.JLabel();
-        jComboBox18 = new javax.swing.JComboBox<>();
-        jLabel18 = new javax.swing.JLabel();
-        jComboBox17 = new javax.swing.JComboBox<>();
-        jLabel19 = new javax.swing.JLabel();
-        jComboBox19 = new javax.swing.JComboBox<>();
-        jLabel20 = new javax.swing.JLabel();
-        jComboBox20 = new javax.swing.JComboBox<>();
+        pnlFields = new javax.swing.JPanel();
+        lblCard = new javax.swing.JLabel();
+        cmbCard = new javax.swing.JComboBox<>();
+        chkCardGenerate = new javax.swing.JCheckBox();
+        lblDummy = new javax.swing.JLabel();
+        lblAccountId = new javax.swing.JLabel();
+        cmbAccountId = new javax.swing.JComboBox<>();
+        lblSearchKey = new javax.swing.JLabel();
+        cmdSearchKey = new javax.swing.JComboBox<>();
+        lblFirstName = new javax.swing.JLabel();
+        cmbFirstName = new javax.swing.JComboBox<>();
+        lblTaxCat = new javax.swing.JLabel();
+        cmbTaxCat = new javax.swing.JComboBox<>();
+        lblLastName = new javax.swing.JLabel();
+        cmbLastName = new javax.swing.JComboBox<>();
+        lblCreditLimit = new javax.swing.JLabel();
+        cmbCreditLimit = new javax.swing.JComboBox<>();
+        lblEmail = new javax.swing.JLabel();
+        cmbEmail = new javax.swing.JComboBox<>();
+        lblPhone1 = new javax.swing.JLabel();
+        cmdPhone1 = new javax.swing.JComboBox<>();
+        lblPhone2 = new javax.swing.JLabel();
+        cmbPhone2 = new javax.swing.JComboBox<>();
+        lblFax = new javax.swing.JLabel();
+        cmdFax = new javax.swing.JComboBox<>();
+        lblAddress1 = new javax.swing.JLabel();
+        cmbAddress1 = new javax.swing.JComboBox<>();
+        lblAddress2 = new javax.swing.JLabel();
+        cmbAddress2 = new javax.swing.JComboBox<>();
+        lblCity = new javax.swing.JLabel();
+        cmbCity = new javax.swing.JComboBox<>();
+        lblRegion = new javax.swing.JLabel();
+        cmbRegion = new javax.swing.JComboBox<>();
+        lblZip = new javax.swing.JLabel();
+        cmbZip = new javax.swing.JComboBox<>();
+        lblCountry = new javax.swing.JLabel();
+        cmbCountry = new javax.swing.JComboBox<>();
+        lblNotes = new javax.swing.JLabel();
+        cmbNotes = new javax.swing.JComboBox<>();
+        lblVisible = new javax.swing.JLabel();
+        cmbVisible = new javax.swing.JComboBox<>();
+        pnlData = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblData = new javax.swing.JTable();
 
-        setLayout(new java.awt.GridBagLayout());
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jLabel1.setText(AppLocal.getIntString("label.taxid")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.weightx = 0.05;
-        add(jLabel1, gridBagConstraints);
+        pnlFields.setLayout(new java.awt.GridLayout(0, 4, 10, 0));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.weightx = 0.05;
-        add(jComboBox1, gridBagConstraints);
+        lblCard.setText(AppLocal.getIntString("label.card")); // NOI18N
+        pnlFields.add(lblCard);
 
-        jLabel2.setText(AppLocal.getIntString("label.searchkey")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.weightx = 0.05;
-        add(jLabel2, gridBagConstraints);
+        cmbCard.setEnabled(false);
+        pnlFields.add(cmbCard);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 0.05;
-        add(jComboBox2, gridBagConstraints);
+        chkCardGenerate.setSelected(true);
+        chkCardGenerate.setText(AppLocal.getIntString("label.generate")); // NOI18N
+        chkCardGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCardGenerateActionPerformed(evt);
+            }
+        });
+        pnlFields.add(chkCardGenerate);
+        pnlFields.add(lblDummy);
 
-        jLabel3.setText(AppLocal.getIntString("label.name")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel3, gridBagConstraints);
+        lblAccountId.setText(AppLocal.getIntString("label.taxid")); // NOI18N
+        pnlFields.add(lblAccountId);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
-        add(jComboBox3, gridBagConstraints);
+        pnlFields.add(cmbAccountId);
 
-        jLabel4.setText(AppLocal.getIntString("label.card")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel4, gridBagConstraints);
+        lblSearchKey.setText(AppLocal.getIntString("label.searchkey")); // NOI18N
+        pnlFields.add(lblSearchKey);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
-        add(jComboBox4, gridBagConstraints);
+        pnlFields.add(cmdSearchKey);
 
-        jLabel5.setText(AppLocal.getIntString("label.custtaxcategory")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel5, gridBagConstraints);
+        lblFirstName.setText(AppLocal.getIntString("label.firstname")); // NOI18N
+        pnlFields.add(lblFirstName);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 2;
-        add(jComboBox5, gridBagConstraints);
+        pnlFields.add(cmbFirstName);
 
-        jLabel6.setText(AppLocal.getIntString("label.maxdebt")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel6, gridBagConstraints);
+        lblTaxCat.setText(AppLocal.getIntString("label.custtaxcategory")); // NOI18N
+        pnlFields.add(lblTaxCat);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 2;
-        add(jComboBox6, gridBagConstraints);
+        pnlFields.add(cmbTaxCat);
 
-        jLabel7.setText(AppLocal.getIntString("label.firstname")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel7, gridBagConstraints);
+        lblLastName.setText(AppLocal.getIntString("label.lastname")); // NOI18N
+        pnlFields.add(lblLastName);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 3;
-        add(jComboBox7, gridBagConstraints);
+        pnlFields.add(cmbLastName);
 
-        jLabel8.setText(AppLocal.getIntString("label.firstname")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel8, gridBagConstraints);
+        lblCreditLimit.setText(AppLocal.getIntString("label.maxdebt")); // NOI18N
+        pnlFields.add(lblCreditLimit);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 3;
-        add(jComboBox8, gridBagConstraints);
+        pnlFields.add(cmbCreditLimit);
 
-        jLabel9.setText(AppLocal.getIntString("label.email")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel9, gridBagConstraints);
+        lblEmail.setText(AppLocal.getIntString("label.email")); // NOI18N
+        pnlFields.add(lblEmail);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 4;
-        add(jComboBox9, gridBagConstraints);
+        pnlFields.add(cmbEmail);
 
-        jLabel11.setText(AppLocal.getIntString("label.phone")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel11, gridBagConstraints);
+        lblPhone1.setText(AppLocal.getIntString("label.phone")); // NOI18N
+        pnlFields.add(lblPhone1);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 4;
-        add(jComboBox10, gridBagConstraints);
+        pnlFields.add(cmdPhone1);
 
-        jLabel10.setText(AppLocal.getIntString("label.phone2")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel10, gridBagConstraints);
+        lblPhone2.setText(AppLocal.getIntString("label.phone2")); // NOI18N
+        pnlFields.add(lblPhone2);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 5;
-        add(jComboBox11, gridBagConstraints);
+        pnlFields.add(cmbPhone2);
 
-        jLabel12.setText(AppLocal.getIntString("label.fax")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel12, gridBagConstraints);
+        lblFax.setText(AppLocal.getIntString("label.fax")); // NOI18N
+        pnlFields.add(lblFax);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 5;
-        add(jComboBox12, gridBagConstraints);
+        pnlFields.add(cmdFax);
 
-        jLabel13.setText(AppLocal.getIntString("label.address")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel13, gridBagConstraints);
+        lblAddress1.setText(AppLocal.getIntString("label.address")); // NOI18N
+        pnlFields.add(lblAddress1);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 6;
-        add(jComboBox13, gridBagConstraints);
+        pnlFields.add(cmbAddress1);
 
-        jLabel14.setText(AppLocal.getIntString("label.address2")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel14, gridBagConstraints);
+        lblAddress2.setText(AppLocal.getIntString("label.address2")); // NOI18N
+        pnlFields.add(lblAddress2);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 6;
-        add(jComboBox14, gridBagConstraints);
+        pnlFields.add(cmbAddress2);
 
-        jLabel15.setText(AppLocal.getIntString("label.city")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel15, gridBagConstraints);
+        lblCity.setText(AppLocal.getIntString("label.city")); // NOI18N
+        pnlFields.add(lblCity);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 7;
-        add(jComboBox15, gridBagConstraints);
+        pnlFields.add(cmbCity);
 
-        jLabel16.setText(AppLocal.getIntString("label.region")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel16, gridBagConstraints);
+        lblRegion.setText(AppLocal.getIntString("label.region")); // NOI18N
+        pnlFields.add(lblRegion);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 7;
-        add(jComboBox16, gridBagConstraints);
+        pnlFields.add(cmbRegion);
 
-        jLabel17.setText(AppLocal.getIntString("label.postal")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel17, gridBagConstraints);
+        lblZip.setText(AppLocal.getIntString("label.postal")); // NOI18N
+        pnlFields.add(lblZip);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 8;
-        add(jComboBox18, gridBagConstraints);
+        pnlFields.add(cmbZip);
 
-        jLabel18.setText(AppLocal.getIntString("label.country")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel18, gridBagConstraints);
+        lblCountry.setText(AppLocal.getIntString("label.country")); // NOI18N
+        pnlFields.add(lblCountry);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 8;
-        add(jComboBox17, gridBagConstraints);
+        pnlFields.add(cmbCountry);
 
-        jLabel19.setText(AppLocal.getIntString("label.notes")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel19, gridBagConstraints);
+        lblNotes.setText(AppLocal.getIntString("label.notes")); // NOI18N
+        pnlFields.add(lblNotes);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 9;
-        add(jComboBox19, gridBagConstraints);
+        pnlFields.add(cmbNotes);
 
-        jLabel20.setText(AppLocal.getIntString("label.visible")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(jLabel20, gridBagConstraints);
+        lblVisible.setText(AppLocal.getIntString("label.visible")); // NOI18N
+        pnlFields.add(lblVisible);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 9;
-        add(jComboBox20, gridBagConstraints);
+        pnlFields.add(cmbVisible);
+
+        add(pnlFields);
+
+        pnlData.setLayout(new java.awt.BorderLayout());
+
+        tblData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblData);
+
+        pnlData.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        add(pnlData);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void chkCardGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCardGenerateActionPerformed
+        cmbCard.setEnabled(!chkCardGenerate.isSelected());
+    }//GEN-LAST:event_chkCardGenerateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox12;
-    private javax.swing.JComboBox<String> jComboBox13;
-    private javax.swing.JComboBox<String> jComboBox14;
-    private javax.swing.JComboBox<String> jComboBox15;
-    private javax.swing.JComboBox<String> jComboBox16;
-    private javax.swing.JComboBox<String> jComboBox17;
-    private javax.swing.JComboBox<String> jComboBox18;
-    private javax.swing.JComboBox<String> jComboBox19;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox20;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JComboBox<String> jComboBox9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JCheckBox chkCardGenerate;
+    private javax.swing.JComboBox<String> cmbAccountId;
+    private javax.swing.JComboBox<String> cmbAddress1;
+    private javax.swing.JComboBox<String> cmbAddress2;
+    private javax.swing.JComboBox<String> cmbCard;
+    private javax.swing.JComboBox<String> cmbCity;
+    private javax.swing.JComboBox<String> cmbCountry;
+    private javax.swing.JComboBox<String> cmbCreditLimit;
+    private javax.swing.JComboBox<String> cmbEmail;
+    private javax.swing.JComboBox<String> cmbFirstName;
+    private javax.swing.JComboBox<String> cmbLastName;
+    private javax.swing.JComboBox<String> cmbNotes;
+    private javax.swing.JComboBox<String> cmbPhone2;
+    private javax.swing.JComboBox<String> cmbRegion;
+    private javax.swing.JComboBox<String> cmbTaxCat;
+    private javax.swing.JComboBox<String> cmbVisible;
+    private javax.swing.JComboBox<String> cmbZip;
+    private javax.swing.JComboBox<String> cmdFax;
+    private javax.swing.JComboBox<String> cmdPhone1;
+    private javax.swing.JComboBox<String> cmdSearchKey;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAccountId;
+    private javax.swing.JLabel lblAddress1;
+    private javax.swing.JLabel lblAddress2;
+    private javax.swing.JLabel lblCard;
+    private javax.swing.JLabel lblCity;
+    private javax.swing.JLabel lblCountry;
+    private javax.swing.JLabel lblCreditLimit;
+    private javax.swing.JLabel lblDummy;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFax;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblNotes;
+    private javax.swing.JLabel lblPhone1;
+    private javax.swing.JLabel lblPhone2;
+    private javax.swing.JLabel lblRegion;
+    private javax.swing.JLabel lblSearchKey;
+    private javax.swing.JLabel lblTaxCat;
+    private javax.swing.JLabel lblVisible;
+    private javax.swing.JLabel lblZip;
+    private javax.swing.JPanel pnlData;
+    private javax.swing.JPanel pnlFields;
+    private javax.swing.JTable tblData;
     // End of variables declaration//GEN-END:variables
 }
