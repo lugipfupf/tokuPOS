@@ -14,17 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.openbravo.pos.imports;
+package com.openbravo.pos.panels;
 
 import com.openbravo.pos.forms.AppLocal;
 
 public class JPanelCSVFileChooser extends javax.swing.JPanel {
-
+    private final JPanelCsvImporter csvImporter;
+    
     /**
      *
      */
-    public JPanelCSVFileChooser() {
+    public JPanelCSVFileChooser(JPanelCsvImporter importer) {
         initComponents();
+        
+        this.csvImporter = importer;
     }
 
     /**
@@ -75,6 +78,11 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
         btnRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/ok.png"))); // NOI18N
         btnRead.setToolTipText(AppLocal.getIntString("label.csvread")); // NOI18N
         btnRead.setPreferredSize(new java.awt.Dimension(64, 32));
+        btnRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRead);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/import.png"))); // NOI18N
@@ -117,6 +125,10 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFile;

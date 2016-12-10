@@ -16,19 +16,26 @@
  */
 package com.openbravo.pos.imports;
 
+import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
-public class JPanelCustomers extends javax.swing.JPanel {
+public class JPanelCustomerFields extends JPanel implements Populator {
 
     /**
      * Creates new form JPanelCustomers
      */
-    public JPanelCustomers() {
+    public JPanelCustomerFields() {
         initComponents();
+    }
+    
+    @Override
+    public int populate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -39,7 +46,6 @@ public class JPanelCustomers extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         pnlFields = new javax.swing.JPanel();
         lblCard = new javax.swing.JLabel();
@@ -266,4 +272,6 @@ public class JPanelCustomers extends javax.swing.JPanel {
     private javax.swing.JPanel pnlFields;
     private javax.swing.JTable tblData;
     // End of variables declaration//GEN-END:variables
+
+    
 }

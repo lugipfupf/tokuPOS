@@ -14,31 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.openbravo.pos.imports;
+package com.openbravo.pos.panels;
 
-import com.openbravo.data.user.EditorRecord;
-import com.openbravo.pos.panels.JPanelCsvImporter;
-import com.unicenta.pozapps.forms.AppLocal;
-
-public class CustomersImportPanel extends JPanelCsvImporter {
-    JPanelCustomerFields fieldConfigurator;
+/**
+ *
+ * @author Beat Luginbühl <lugi@lugipfupf.ch>
+ */
+public abstract class JPanelCsvImporter extends JPanelTable2 {
+    protected JPanelCSVFileChooser fileChooserPanel;
     
     @Override
     protected void init() {
-        super.init();
-        
-        this.fieldConfigurator = new JPanelCustomerFields();
-        this.fieldConfigurator.setComponentOrientation(getComponentOrientation());
-        this.container.add(this.fieldConfigurator);
+        startNavigation();
     }
-
+    
     @Override
-    public EditorRecord getEditor() {
-        return null;
+    protected void startNavigation() {
+        this.fileChooserPanel = new JPanelCSVFileChooser(this);
+        this.fileChooserPanel.setComponentOrientation(getComponentOrientation());
+        this.toolbar.add(this.fileChooserPanel);
     }
-
+    
     @Override
-    public String getTitle() {
-        return AppLocal.getIntString("Menu.CSVCustomerImport");
+    public boolean deactivate() {
+        return true;
     }
 }
