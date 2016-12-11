@@ -16,6 +16,10 @@
  */
 package com.openbravo.pos.panels;
 
+import com.unicenta.pozapps.forms.AppLocal;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
@@ -25,6 +29,10 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     
     @Override
     protected void init() {
+    }
+    
+    @Override
+    public void activate() {
         startNavigation();
     }
     
@@ -38,5 +46,11 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     @Override
     public boolean deactivate() {
         return true;
+    }
+    
+    public void readCsvMetaData(File csvFile) throws FileNotFoundException {
+        if ( ! csvFile.exists()) {
+            throw new FileNotFoundException(AppLocal.getIntString("label.error.filenotfound.message"));
+        }
     }
 }
