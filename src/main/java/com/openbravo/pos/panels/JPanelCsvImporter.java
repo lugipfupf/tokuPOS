@@ -16,9 +16,17 @@
  */
 package com.openbravo.pos.panels;
 
+import com.csvreader.CsvReader;
+import com.openbravo.pos.customers.DataLogicCustomers;
+import com.openbravo.pos.imports.JPanelCustomerFields;
 import com.unicenta.pozapps.forms.AppLocal;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +34,7 @@ import java.io.FileNotFoundException;
  */
 public abstract class JPanelCsvImporter extends JPanelTable2 {
     protected JPanelCSVFileChooser fileChooserPanel;
+    protected JPanelPopulatable fieldConfigurator;
     
     @Override
     protected void init() {
@@ -48,9 +57,28 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
         return true;
     }
     
-    public void readCsvMetaData(File csvFile) throws FileNotFoundException {
-        if ( ! csvFile.exists()) {
-            throw new FileNotFoundException(AppLocal.getIntString("label.error.filenotfound.message"));
+    public void readCsvMetaData(String csvFileName, char delimiter, char quote) throws FileNotFoundException {
+        CsvReader csvReader = new CsvReader(csvFileName);
+        csvReader.setDelimiter(delimiter);
+        csvReader.setTextQualifier(quote);
+        
+        try {
+            csvReader.readHeaders();
+            String[] headers = csvReader.getHeaders();
+            
+            int recordCount = 0;
+            while (csvReader.skipRecord()) {
+                recordCount++;
+            }
+            ArrayList<String> recordCountList = new ArrayList<>();
+            ArrayList<String> headerList = new ArrayList<>();
+            recordCountList.add(String.valueOf(recordCount));
+            headerList.addAll(Arrays.asList(headers));
+            
+            this.fileChooserPanel.populate(recordCountList);
+            this.fieldConfigurator.populate(headerList);
+        } catch (IOException ex) {
+            Logger.getLogger(JPanelCsvImporter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

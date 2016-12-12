@@ -21,12 +21,8 @@ import com.openbravo.pos.panels.JPanelCsvImporter;
 import com.unicenta.pozapps.forms.AppLocal;
 
 public class CustomersImportPanel extends JPanelCsvImporter {
-    JPanelCustomerFields fieldConfigurator;
-    
     @Override
     protected void init() {
-        super.init();
-        
         this.fieldConfigurator = new JPanelCustomerFields();
         this.fieldConfigurator.setComponentOrientation(getComponentOrientation());
         this.container.add(this.fieldConfigurator);

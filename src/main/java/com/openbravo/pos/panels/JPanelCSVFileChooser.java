@@ -19,16 +19,19 @@ package com.openbravo.pos.panels;
 import com.openbravo.pos.forms.AppLocal;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class JPanelCSVFileChooser extends javax.swing.JPanel {
+public class JPanelCSVFileChooser extends JPanelPopulatable {
 
     private static final String FILE_FILTER_DESCRIPTION = "CSV Files *.csv";
     private static final String FILE_FILTER = "csv";
+    private static final char CSV_DEFAULT_DELIMITER = ',';
+    private static final char CSV_DEFAULT_QUOTE = '"';
 
     private final JPanelCsvImporter csvImporter;
     private JFileChooser fileChooser;
@@ -124,15 +127,25 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
         lblDelim.setText(AppLocal.getIntString("label.csvdelimit")); // NOI18N
         jPanel2.add(lblDelim);
 
-        txtDelim.setText(",");
+        txtDelim.setText(String.valueOf(CSV_DEFAULT_DELIMITER));
         txtDelim.setPreferredSize(new java.awt.Dimension(32, 28));
+        txtDelim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDelimKeyTypedHandler(evt);
+            }
+        });
         jPanel2.add(txtDelim);
 
         lblQuote.setText(AppLocal.getIntString("label.csvquote")); // NOI18N
         jPanel2.add(lblQuote);
 
-        txtQuote.setText("\"");
+        txtQuote.setText(String.valueOf(CSV_DEFAULT_QUOTE));
         txtQuote.setPreferredSize(new java.awt.Dimension(32, 28));
+        txtQuote.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuoteKeyTypedHandler(evt);
+            }
+        });
         jPanel2.add(txtQuote);
 
         lblRecordsFound.setText(AppLocal.getIntString("label.csvrecordsfound")); // NOI18N
@@ -152,7 +165,14 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
         if (this.txtFile.getText().length() > 0) {
             try {
-                this.csvImporter.readCsvMetaData(new File(this.txtFile.getText()));
+                if (this.txtDelim.getText().length() < 1) {
+                    this.txtDelim.setText(String.valueOf(CSV_DEFAULT_DELIMITER));
+                }
+                if (this.txtQuote.getText().length() < 1) {
+                    this.txtQuote.setText(String.valueOf(CSV_DEFAULT_QUOTE));
+                }
+                
+                this.csvImporter.readCsvMetaData(this.txtFile.getText(), this.txtDelim.getText().charAt(0), this.txtQuote.getText().charAt(0));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(JPanelCSVFileChooser.class.getName()).log(
                         Level.WARNING, "{0}: {1}", new Object[]{ex.getMessage(), this.txtFile.getText()}
@@ -168,6 +188,18 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
             this.txtFile.setText(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_btnFileActionPerformed
+
+    private void txtDelimKeyTypedHandler(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDelimKeyTypedHandler
+        if (txtDelim.getText().length() > 0) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDelimKeyTypedHandler
+
+    private void txtQuoteKeyTypedHandler(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuoteKeyTypedHandler
+        if (txtQuote.getText().length() > 0) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtQuoteKeyTypedHandler
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFile;
@@ -186,4 +218,9 @@ public class JPanelCSVFileChooser extends javax.swing.JPanel {
     private javax.swing.JTextField txtQuote;
     private javax.swing.JTextField txtRecordsFound;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void populate(List data) {
+        this.txtRecordsFound.setText(data.get(0).toString());
+    }
 }

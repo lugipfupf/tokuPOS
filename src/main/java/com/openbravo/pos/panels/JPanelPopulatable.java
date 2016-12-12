@@ -14,14 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.openbravo.data.gui;
+package com.openbravo.pos.panels;
 
-import java.util.List;
+import com.openbravo.data.gui.Populator;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
-public interface Populator {
-    public void populate(List<String> data);
+public abstract class JPanelPopulatable extends JPanel implements Populator {
+    
 }
