@@ -16,13 +16,30 @@
  */
 package com.openbravo.pos.panels;
 
+import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.Populator;
+import com.openbravo.pos.forms.JPanelView;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
-public abstract class JPanelPopulatable extends JPanel implements Populator {
-    
+public abstract class JPanelPopulatable extends JPanel implements JPanelView {
+    public abstract Populator getPopulator();
+
+    @Override
+    public String getTitle() {
+        return "";
+    }
+
+    @Override
+    public void activate() throws BasicException {
+    }
+
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 }

@@ -16,10 +16,10 @@
  */
 package com.openbravo.pos.imports;
 
+import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JComboBox;
 
 /**
@@ -58,17 +58,27 @@ public class JPanelCustomerFields extends JPanelPopulatable {
     }
 
     @Override
-    public void populate(List<String> data) {
-        for (JComboBox box : combos) {
-            box.addItem("");
-            for (String header : data) {
-                box.addItem(header);
+    public Populator<ArrayList<String>> getPopulator() {
+        return headerList -> {
+            for (JComboBox box : this.combos) {
+                box.addItem("");
+                for (String header : headerList) {
+                    box.addItem(header);
+                }
+                
+                if (headerList.contains(box.getName())) {
+                    box.setSelectedItem(box.getName());
+                }
             }
-            
-            if (data.contains(box.getName())) {
-                box.setSelectedItem(box.getName());
-            }
+        };
+    }
+    
+    @Override
+    public boolean deactivate() {
+        for (JComboBox box : this.combos) {
+            box.removeAllItems();
         }
+        return true;
     }
 
     /**

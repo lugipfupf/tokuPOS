@@ -16,12 +16,11 @@
  */
 package com.openbravo.data.gui;
 
-import java.util.List;
-
 /**
  *
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
-public interface Populator {
-    public void populate(List<String> data);
+@FunctionalInterface
+public interface Populator<T> {
+    public void populate(T data);
 }

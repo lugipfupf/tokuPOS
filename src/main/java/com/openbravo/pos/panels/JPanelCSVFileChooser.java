@@ -16,10 +16,9 @@
  */
 package com.openbravo.pos.panels;
 
+import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -34,8 +33,7 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
     private static final char CSV_DEFAULT_QUOTE = '"';
 
     private final JPanelCsvImporter csvImporter;
-    private JFileChooser fileChooser;
-    private File csvFile;
+    private final JFileChooser fileChooser;
 
     /**
      *
@@ -220,7 +218,14 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void populate(List data) {
-        this.txtRecordsFound.setText(data.get(0).toString());
+    public Populator<Integer> getPopulator() {
+        return recordCount -> this.txtRecordsFound.setText(String.valueOf(recordCount));
+    }
+    
+    @Override
+    public boolean deactivate() {
+        this.txtFile.setText("");
+        this.txtRecordsFound.setText("");
+        return true;
     }
 }

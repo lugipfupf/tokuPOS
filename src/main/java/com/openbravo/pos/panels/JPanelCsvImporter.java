@@ -54,6 +54,8 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     
     @Override
     public boolean deactivate() {
+        this.fieldConfigurator.deactivate();
+        this.fileChooserPanel.deactivate();
         return true;
     }
     
@@ -70,13 +72,11 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
             while (csvReader.skipRecord()) {
                 recordCount++;
             }
-            ArrayList<String> recordCountList = new ArrayList<>();
             ArrayList<String> headerList = new ArrayList<>();
-            recordCountList.add(String.valueOf(recordCount));
             headerList.addAll(Arrays.asList(headers));
             
-            this.fileChooserPanel.populate(recordCountList);
-            this.fieldConfigurator.populate(headerList);
+            this.fileChooserPanel.getPopulator().populate(recordCount);
+            this.fieldConfigurator.getPopulator().populate(headerList);
         } catch (IOException ex) {
             Logger.getLogger(JPanelCsvImporter.class.getName()).log(Level.SEVERE, null, ex);
         }
