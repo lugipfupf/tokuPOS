@@ -17,8 +17,9 @@
 package com.openbravo.pos.panels;
 
 import com.csvreader.CsvReader;
+import com.openbravo.pos.customers.CustomerInfoExt;
 import com.openbravo.pos.customers.DataLogicCustomers;
-import com.openbravo.pos.imports.JPanelCustomerFields;
+import com.openbravo.pos.customers.JPanelCustomerFields;
 import com.unicenta.pozapps.forms.AppLocal;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,6 +36,7 @@ import java.util.logging.Logger;
 public abstract class JPanelCsvImporter extends JPanelTable2 {
     protected JPanelCSVFileChooser fileChooserPanel;
     protected JPanelPopulatable fieldConfigurator;
+    protected JPanelPopulatable itemList;
     
     @Override
     protected void init() {
@@ -50,12 +52,13 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
         this.fileChooserPanel = new JPanelCSVFileChooser(this);
         this.fileChooserPanel.setComponentOrientation(getComponentOrientation());
         this.toolbar.add(this.fileChooserPanel);
-    }
+    }        
     
     @Override
     public boolean deactivate() {
         this.fieldConfigurator.deactivate();
         this.fileChooserPanel.deactivate();
+        this.itemList.deactivate();
         return true;
     }
     

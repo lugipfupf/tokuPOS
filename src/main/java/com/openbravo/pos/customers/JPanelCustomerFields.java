@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.openbravo.pos.imports;
+package com.openbravo.pos.customers;
 
 import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
@@ -130,9 +130,6 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         cmbNotes = new javax.swing.JComboBox<>();
         lblVisible = new javax.swing.JLabel();
         cmbVisible = new javax.swing.JComboBox<>();
-        pnlData = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblData = new javax.swing.JTable();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -265,22 +262,6 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         pnlFields.add(cmbVisible);
 
         add(pnlFields);
-
-        pnlData.setLayout(new java.awt.BorderLayout());
-
-        tblData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tblData);
-
-        pnlData.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        add(pnlData);
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkCardGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCardGenerateActionPerformed
@@ -309,7 +290,6 @@ public class JPanelCustomerFields extends JPanelPopulatable {
     private javax.swing.JComboBox<String> cmdFax;
     private javax.swing.JComboBox<String> cmdPhone1;
     private javax.swing.JComboBox<String> cmdSearchKey;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAccountId;
     private javax.swing.JLabel lblAddress1;
     private javax.swing.JLabel lblAddress2;
@@ -330,9 +310,7 @@ public class JPanelCustomerFields extends JPanelPopulatable {
     private javax.swing.JLabel lblTaxCat;
     private javax.swing.JLabel lblVisible;
     private javax.swing.JLabel lblZip;
-    private javax.swing.JPanel pnlData;
     private javax.swing.JPanel pnlFields;
-    private javax.swing.JTable tblData;
     // End of variables declaration//GEN-END:variables
 
 }
