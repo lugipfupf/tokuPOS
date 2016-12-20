@@ -16,6 +16,7 @@
  */
 package com.openbravo.pos.panels;
 
+import com.openbravo.pos.imports.JPanelCsvImporter;
 import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
 import java.io.FileNotFoundException;
@@ -64,7 +65,7 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
         txtFile = new javax.swing.JTextField();
         btnFile = new javax.swing.JButton();
         btnRead = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnReadData = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblConfig = new javax.swing.JLabel();
         lblDelim = new javax.swing.JLabel();
@@ -101,6 +102,7 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
 
         btnRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/ok.png"))); // NOI18N
         btnRead.setToolTipText(AppLocal.getIntString("label.csvread")); // NOI18N
+        btnRead.setEnabled(false);
         btnRead.setPreferredSize(new java.awt.Dimension(64, 32));
         btnRead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,10 +111,16 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
         });
         jPanel1.add(btnRead);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/import.png"))); // NOI18N
-        jButton1.setToolTipText(AppLocal.getIntString("label.csvimpostbct")); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(64, 32));
-        jPanel1.add(jButton1);
+        btnReadData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/import.png"))); // NOI18N
+        btnReadData.setToolTipText(AppLocal.getIntString("label.csvimpostbct")); // NOI18N
+        btnReadData.setEnabled(false);
+        btnReadData.setPreferredSize(new java.awt.Dimension(64, 32));
+        btnReadData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadDataActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReadData);
 
         jPanel3.add(jPanel1);
 
@@ -178,12 +186,15 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         AppLocal.getIntString("label.error.filenotfound.title"), JOptionPane.ERROR_MESSAGE);
             }
+            
+            this.btnReadData.setEnabled(true);
         }
     }//GEN-LAST:event_btnReadActionPerformed
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             this.txtFile.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            this.btnRead.setEnabled(true);
         }
     }//GEN-LAST:event_btnFileActionPerformed
 
@@ -199,10 +210,18 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
         }
     }//GEN-LAST:event_txtQuoteKeyTypedHandler
 
+    private void btnReadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadDataActionPerformed
+        try {
+            this.csvImporter.readCsvData();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JPanelCSVFileChooser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnReadDataActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFile;
     private javax.swing.JButton btnRead;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnReadData;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

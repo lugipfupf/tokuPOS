@@ -19,7 +19,6 @@ package com.openbravo.pos.imports;
 import com.openbravo.pos.customers.JPanelCustomerFields;
 import com.openbravo.data.user.EditorRecord;
 import com.openbravo.pos.customers.JPanelCustomerList;
-import com.openbravo.pos.panels.JPanelCsvImporter;
 import com.unicenta.pozapps.forms.AppLocal;
 
 public class CustomersImportPanel extends JPanelCsvImporter {

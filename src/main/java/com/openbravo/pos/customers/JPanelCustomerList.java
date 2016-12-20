@@ -18,13 +18,22 @@ package com.openbravo.pos.customers;
 
 import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.panels.JPanelPopulatable;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
 public class JPanelCustomerList extends JPanelPopulatable {
+    private final CustomerListModel model = new CustomerListModel();
 
     /**
      * Creates new form JPanelItemList
@@ -46,14 +55,7 @@ public class JPanelCustomerList extends JPanelPopulatable {
 
         setLayout(new java.awt.BorderLayout());
 
-        tblData.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
+        tblData.setModel(model);
         jScrollPane1.setViewportView(tblData);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -62,7 +64,22 @@ public class JPanelCustomerList extends JPanelPopulatable {
     @Override
     public Populator<ArrayList<CustomerInfoExt>> getPopulator() {
         return (ArrayList<CustomerInfoExt> customerList) -> {
-            System.out.println("POPULATING LIST");
+           CustomerInfoExt cust1 = new CustomerInfoExt(null);
+           CustomerInfoExt cust2 = new CustomerInfoExt("1234");
+           cust1.setFirstname("Yasmine");
+           cust1.setLastname("Willi");
+           cust2.setCard("blah");
+           cust2.setFirstname("Beat");
+           cust2.setLastname("Luginbühl");
+           
+           CustomerListItem item1 = new CustomerListItem(cust1, cust1.getId() != null);
+           CustomerListItem item2= new CustomerListItem(cust2, cust2.getId() != null);
+           
+           ArrayList<CustomerListItem> items = new ArrayList<>();
+           items.add(item1);
+           items.add(item2);
+           
+           this.model.setData(items);
         };
     }
 
@@ -76,4 +93,83 @@ public class JPanelCustomerList extends JPanelPopulatable {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblData;
     // End of variables declaration//GEN-END:variables
+
+    private class CustomerListModel extends AbstractTableModel {
+        private ArrayList<CustomerListItem> customerList = new ArrayList<>();
+        private final HashMap<Integer, String> colNames = new HashMap<>();
+        private final HashMap<Integer, Class> colTypes = new HashMap<>();
+        
+        public CustomerListModel() {
+            colNames.put(0, "Card");
+            colNames.put(1, "Firstname");
+            colNames.put(2, "Lastname");
+            
+            colTypes.put(0, String.class);
+            colTypes.put(1, String.class);
+            colTypes.put(2, String.class);
+        }
+        
+        public void setData(ArrayList<CustomerListItem> customers) {
+            this.customerList = customers;
+            
+            fireTableDataChanged();
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            return this.colNames.get(column);
+        }
+        
+        @Override
+        public Class<?> getColumnClass(int col) {
+            return this.colTypes.get(col);
+        }
+        
+        @Override
+        public int getRowCount() {
+            return customerList.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return colNames.size();
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            MethodHandles.Lookup lookup = MethodHandles.lookup();
+            try {
+                // probably pretty inefficient...
+                MethodHandle mh = lookup.findVirtual(CustomerInfoExt.class, "get" + colNames.get(columnIndex), MethodType.methodType(this.colTypes.get(columnIndex)));
+                return mh.invoke(this.customerList.get(rowIndex).getCustomer());
+            } catch (NoSuchFieldException ex) {
+                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Throwable ex) {
+                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return null;
+        }
+        
+    }
+    
+    private class CustomerListItem {
+        private CustomerInfoExt customer;
+        private boolean isExisting = false;
+
+        public CustomerListItem(CustomerInfoExt customerInfoExt, boolean isExisting) {
+            this.customer = customerInfoExt;
+            this.isExisting = isExisting;
+        }
+        
+        public CustomerInfoExt getCustomer() {
+            return customer;
+        }
+
+        public boolean isIsExisting() {
+            return isExisting;
+        }
+    }
 }

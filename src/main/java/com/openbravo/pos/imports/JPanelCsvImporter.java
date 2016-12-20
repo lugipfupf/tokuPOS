@@ -14,12 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.openbravo.pos.panels;
+package com.openbravo.pos.imports;
 
 import com.csvreader.CsvReader;
 import com.openbravo.pos.customers.CustomerInfoExt;
 import com.openbravo.pos.customers.DataLogicCustomers;
 import com.openbravo.pos.customers.JPanelCustomerFields;
+import com.openbravo.pos.panels.JPanelCSVFileChooser;
+import com.openbravo.pos.panels.JPanelPopulatable;
+import com.openbravo.pos.panels.JPanelTable2;
 import com.unicenta.pozapps.forms.AppLocal;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,6 +40,8 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     protected JPanelCSVFileChooser fileChooserPanel;
     protected JPanelPopulatable fieldConfigurator;
     protected JPanelPopulatable itemList;
+    
+    private CsvReader csvReader;
     
     @Override
     protected void init() {
@@ -63,16 +68,16 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     }
     
     public void readCsvMetaData(String csvFileName, char delimiter, char quote) throws FileNotFoundException {
-        CsvReader csvReader = new CsvReader(csvFileName);
-        csvReader.setDelimiter(delimiter);
-        csvReader.setTextQualifier(quote);
+        this.csvReader = new CsvReader(csvFileName);
+        this.csvReader.setDelimiter(delimiter);
+        this.csvReader.setTextQualifier(quote);
         
         try {
-            csvReader.readHeaders();
-            String[] headers = csvReader.getHeaders();
+            this.csvReader.readHeaders();
+            String[] headers = this.csvReader.getHeaders();
             
             int recordCount = 0;
-            while (csvReader.skipRecord()) {
+            while (this.csvReader.skipRecord()) {
                 recordCount++;
             }
             ArrayList<String> headerList = new ArrayList<>();
@@ -83,5 +88,13 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
         } catch (IOException ex) {
             Logger.getLogger(JPanelCsvImporter.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void readCsvData() throws FileNotFoundException {
+        if (this.csvReader == null) {
+            throw new ImportException("No csv etadata present");
+        }
+        
+        this.itemList.getPopulator().populate(new ArrayList<CustomerInfoExt>());
     }
 }
