@@ -17,18 +17,15 @@
 package com.openbravo.pos.imports;
 
 import com.csvreader.CsvReader;
-import com.openbravo.pos.customers.CustomerInfoExt;
-import com.openbravo.pos.customers.DataLogicCustomers;
-import com.openbravo.pos.customers.JPanelCustomerFields;
 import com.openbravo.pos.panels.JPanelCSVFileChooser;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import com.openbravo.pos.panels.JPanelTable2;
-import com.unicenta.pozapps.forms.AppLocal;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,6 +39,10 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     protected JPanelPopulatable itemList;
     
     private CsvReader csvReader;
+    private String csvFileName;
+    private char csvDelimiter;
+    private char csvQuote;
+    private String[] csvHeaders;
     
     @Override
     protected void init() {
@@ -68,9 +69,11 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     }
     
     public void readCsvMetaData(String csvFileName, char delimiter, char quote) throws FileNotFoundException {
-        this.csvReader = new CsvReader(csvFileName);
-        this.csvReader.setDelimiter(delimiter);
-        this.csvReader.setTextQualifier(quote);
+        this.csvFileName = csvFileName;
+        this.csvDelimiter = delimiter;
+        this.csvQuote = quote;
+        
+        initCsvReader();
         
         try {
             this.csvReader.readHeaders();
@@ -85,16 +88,52 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
             
             this.fileChooserPanel.getPopulator().populate(recordCount);
             this.fieldConfigurator.getPopulator().populate(headerList);
+            
+            this.csvReader.close();
         } catch (IOException ex) {
             Logger.getLogger(JPanelCsvImporter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void readCsvData() throws FileNotFoundException {
-        if (this.csvReader == null) {
-            throw new ImportException("No csv etadata present");
+        initCsvReader();
+
+        ArrayList<HashMap<String, String>> data = new ArrayList<>();
+        
+        try {
+            this.csvReader.readHeaders();
+            while (this.csvReader.readRecord()) {
+                data.add(this.readCsvLine());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(JPanelCsvImporter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        this.itemList.getPopulator().populate(new ArrayList<CustomerInfoExt>());
+        this.itemList.setConfig(this.fieldConfigurator.getConfig());
+        this.itemList.getPopulator().populate(data);
+    }
+    
+    private void initCsvReader() throws FileNotFoundException {
+        if (this.csvFileName == null) {
+            throw new ImportException("No csv metadata present");
+        }
+        
+        this.csvReader = new CsvReader(this.csvFileName, this.csvDelimiter, Charset.forName("UTF-8"));
+        this.csvReader.setTextQualifier(this.csvQuote);
+    }
+    
+    private HashMap<String, String> readCsvLine() throws IOException {
+        HashMap<String, String> data = new HashMap<>();
+        
+        if (this.csvHeaders == null) {
+            this.csvHeaders = this.csvReader.getHeaders();
+        }
+        String[] values = this.csvReader.getValues();
+        
+        for (int i = 0; i < csvHeaders.length; i++) {
+            data.put(csvHeaders[i], values[i]);
+        }
+        
+        return data;
     }
 }

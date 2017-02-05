@@ -17,15 +17,11 @@
 package com.openbravo.pos.customers;
 
 import com.openbravo.data.gui.Populator;
+import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.panels.JPanelPopulatable;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
+import com.openbravo.pos.util.StringUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -34,6 +30,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class JPanelCustomerList extends JPanelPopulatable {
     private final CustomerListModel model = new CustomerListModel();
+    private HashMap<String, String> config;
 
     /**
      * Creates new form JPanelItemList
@@ -62,30 +59,54 @@ public class JPanelCustomerList extends JPanelPopulatable {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    public Populator<ArrayList<CustomerInfoExt>> getPopulator() {
-        return (ArrayList<CustomerInfoExt> customerList) -> {
-           CustomerInfoExt cust1 = new CustomerInfoExt(null);
-           CustomerInfoExt cust2 = new CustomerInfoExt("1234");
-           cust1.setFirstname("Yasmine");
-           cust1.setLastname("Willi");
-           cust2.setCard("blah");
-           cust2.setFirstname("Beat");
-           cust2.setLastname("Luginbühl");
-           
-           CustomerListItem item1 = new CustomerListItem(cust1, cust1.getId() != null);
-           CustomerListItem item2= new CustomerListItem(cust2, cust2.getId() != null);
-           
-           ArrayList<CustomerListItem> items = new ArrayList<>();
-           items.add(item1);
-           items.add(item2);
-           
-           this.model.setData(items);
+    public Populator<ArrayList<HashMap<String, String>>> getPopulator() {
+        return (ArrayList<HashMap<String, String>> data) -> {
+            if (this.config == null) {
+                throw new IllegalStateException("No config has been set. Don't know how to treat data.");
+            }
+            
+            ArrayList<CustomerListItem> customers = new ArrayList<>();
+            
+            data.forEach((HashMap<String, String> record) -> {
+                CustomerInfoExt cust = new CustomerInfoExt(null);
+                
+                String card = this.config.get("card").equals("GENERATE") ? StringUtils.getCardNumber() : record.get(this.config.get("card"));
+                cust.setCard(card);
+                cust.setFirstname(record.get(this.config.get("firstname")));
+                cust.setLastname(record.get(this.config.get("lastname")));
+                cust.setTaxid(record.get(this.config.get("lastname")));
+                cust.setNotes(record.get(this.config.get("lastname")));
+                cust.setVisible(Boolean.parseBoolean(record.get(this.config.get("lastname"))));
+                cust.setEmail(record.get(this.config.get("email")));
+                cust.setPhone(record.get(this.config.get("phone")));
+                cust.setPhone2(record.get(this.config.get("phone2")));
+                cust.setFax(record.get(this.config.get("fax")));
+                cust.setAddress(record.get(this.config.get("address")));
+                cust.setAddress2(record.get(this.config.get("address2")));
+                cust.setPostal(record.get(this.config.get("postal")));
+                cust.setCity(record.get(this.config.get("city")));
+                cust.setCountry(record.get(this.config.get("country")));
+                cust.setSearchkey(record.get(this.config.get("name")));
+                cust.setRegion(record.get(this.config.get("region")));
+                
+                boolean isExisting = false;
+                boolean doImport = !isExisting;
+                
+                customers.add(new CustomerListItem(cust, isExisting, doImport));
+            });
+            
+            this.model.setData(customers);
         };
     }
 
     @Override
+    public void setConfig(HashMap<String, String> config) {
+        this.config = config;
+    }
+
+    @Override
     public boolean deactivate() {
-        return true;
+        return this.model.clearData();
     }
 
 
@@ -100,13 +121,23 @@ public class JPanelCustomerList extends JPanelPopulatable {
         private final HashMap<Integer, Class> colTypes = new HashMap<>();
         
         public CustomerListModel() {
-            colNames.put(0, "Card");
-            colNames.put(1, "Firstname");
-            colNames.put(2, "Lastname");
+            colNames.put(0, AppLocal.getIntString("label.import"));
+            colNames.put(1, AppLocal.getIntString("label.new"));
+            colNames.put(2, AppLocal.getIntString("label.card"));
+            colNames.put(3, AppLocal.getIntString("label.firstname"));
+            colNames.put(4, AppLocal.getIntString("label.lastname"));
+            colNames.put(5, AppLocal.getIntString("label.address"));
+            colNames.put(6, AppLocal.getIntString("label.city"));
+            colNames.put(7, AppLocal.getIntString("label.email"));
             
-            colTypes.put(0, String.class);
-            colTypes.put(1, String.class);
+            colTypes.put(0, Boolean.class);
+            colTypes.put(1, Boolean.class);
             colTypes.put(2, String.class);
+            colTypes.put(3, String.class);
+            colTypes.put(4, String.class);
+            colTypes.put(5, String.class);
+            colTypes.put(6, String.class);
+            colTypes.put(7, String.class);
         }
         
         public void setData(ArrayList<CustomerListItem> customers) {
@@ -137,20 +168,34 @@ public class JPanelCustomerList extends JPanelPopulatable {
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            MethodHandles.Lookup lookup = MethodHandles.lookup();
-            try {
-                // probably pretty inefficient...
-                MethodHandle mh = lookup.findVirtual(CustomerInfoExt.class, "get" + colNames.get(columnIndex), MethodType.methodType(this.colTypes.get(columnIndex)));
-                return mh.invoke(this.customerList.get(rowIndex).getCustomer());
-            } catch (NoSuchFieldException ex) {
-                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Throwable ex) {
-                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
+            CustomerListItem customer = this.customerList.get(rowIndex);
+            
+            switch (columnIndex) {
+                case 0:
+                    return customer.getDoImport();
+                case 1:
+                    return customer.isIsExisting();
+                case 2:
+                    return customer.getCustomer().getCard();
+                case 3:
+                    return customer.getCustomer().getFirstname();
+                case 4:
+                    return customer.getCustomer().getLastname();
+                case 5:
+                    return customer.getCustomer().getAddress();
+                case 6:
+                    return customer.getCustomer().getCity();
+                case 7:
+                    return customer.getCustomer().getEmail();
             }
             
             return null;
+        }
+        
+        public boolean clearData() {
+            this.customerList.clear();
+            fireTableDataChanged();
+            return this.getRowCount() == 0;
         }
         
     }
@@ -158,10 +203,12 @@ public class JPanelCustomerList extends JPanelPopulatable {
     private class CustomerListItem {
         private CustomerInfoExt customer;
         private boolean isExisting = false;
+        private boolean doImport = true;
 
-        public CustomerListItem(CustomerInfoExt customerInfoExt, boolean isExisting) {
+        public CustomerListItem(CustomerInfoExt customerInfoExt, boolean isExisting, boolean doImport) {
             this.customer = customerInfoExt;
             this.isExisting = isExisting;
+            this.doImport = doImport;
         }
         
         public CustomerInfoExt getCustomer() {
@@ -170,6 +217,14 @@ public class JPanelCustomerList extends JPanelPopulatable {
 
         public boolean isIsExisting() {
             return isExisting;
+        }
+        
+        public void setDoImport(boolean doIt) {
+            this.doImport = doIt;
+        }
+        
+        public boolean getDoImport() {
+            return this.doImport;
         }
     }
 }

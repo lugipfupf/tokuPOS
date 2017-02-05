@@ -19,6 +19,7 @@ package com.openbravo.pos.panels;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.JPanelView;
+import java.util.HashMap;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -28,6 +29,14 @@ import javax.swing.JPanel;
  */
 public abstract class JPanelPopulatable extends JPanel implements JPanelView {
     public abstract Populator getPopulator();
+    
+    public HashMap<String, String> getConfig() {
+        throw new UnsupportedOperationException("This optional method has to be overriden in order to use it");
+    }
+    
+    public void setConfig(HashMap<String, String> config) {
+        throw new UnsupportedOperationException("This optional method has to be overriden in order to use it");
+    }
 
     @Override
     public String getTitle() {

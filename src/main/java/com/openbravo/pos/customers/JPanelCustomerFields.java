@@ -20,6 +20,7 @@ import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JComboBox;
 
 /**
@@ -27,6 +28,8 @@ import javax.swing.JComboBox;
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
 public class JPanelCustomerFields extends JPanelPopulatable {
+    
+    public static String CARD_GENERATE = "GENERATE";
 
     private ArrayList<JComboBox> combos = new ArrayList<>();
 
@@ -38,15 +41,15 @@ public class JPanelCustomerFields extends JPanelPopulatable {
 
         combos.add(cmbCard);
         combos.add(cmbAccountId);
-        combos.add(cmdSearchKey);
+        combos.add(cmbSearchKey);
         combos.add(cmbFirstName);
         combos.add(cmbTaxCat);
         combos.add(cmbLastName);
         combos.add(cmbCreditLimit);
         combos.add(cmbEmail);
-        combos.add(cmdPhone1);
+        combos.add(cmbPhone1);
         combos.add(cmbPhone2);
-        combos.add(cmdFax);
+        combos.add(cmbFax);
         combos.add(cmbAddress1);
         combos.add(cmbAddress2);
         combos.add(cmbCity);
@@ -56,7 +59,33 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         combos.add(cmbNotes);
         combos.add(cmbVisible);
     }
+    
+    @Override
+    public HashMap<String, String> getConfig() {
+        HashMap<String, String> config = new HashMap<>();
 
+        config.put("card", chkCardGenerate.isSelected() ? CARD_GENERATE : (String) cmbCard.getSelectedItem());
+        config.put("taxid", (String) cmbTaxCat.getSelectedItem());
+        config.put("notes", (String) cmbNotes.getSelectedItem());
+        config.put("visible", (String) cmbVisible.getSelectedItem());
+        config.put("firstname", (String) cmbFirstName.getSelectedItem());
+        config.put("lastname", (String) cmbLastName.getSelectedItem());
+        config.put("email", (String) cmbEmail.getSelectedItem());
+        config.put("phone", (String) cmbPhone1.getSelectedItem());
+        config.put("phone2", (String) cmbPhone2.getSelectedItem());
+        config.put("fax", (String) cmbFax.getSelectedItem());
+        config.put("address", (String) cmbAddress1.getSelectedItem());
+        config.put("address2", (String) cmbAddress2.getSelectedItem());
+        config.put("postal", (String) cmbZip.getSelectedItem());
+        config.put("city", (String) cmbCity.getSelectedItem());
+        config.put("region", (String) cmbRegion.getSelectedItem());
+        config.put("country", (String) cmbCountry.getSelectedItem());
+        config.put("searchkey", (String) cmbSearchKey.getSelectedItem());
+        config.put("taxid", (String) cmbTaxCat.getSelectedItem());
+        
+        return config;
+    }
+    
     @Override
     public Populator<ArrayList<String>> getPopulator() {
         return headerList -> {
@@ -75,9 +104,9 @@ public class JPanelCustomerFields extends JPanelPopulatable {
     
     @Override
     public boolean deactivate() {
-        for (JComboBox box : this.combos) {
+        this.combos.stream().forEach((box) -> {
             box.removeAllItems();
-        }
+        });
         return true;
     }
 
@@ -97,7 +126,7 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         lblAccountId = new javax.swing.JLabel();
         cmbAccountId = new javax.swing.JComboBox<>();
         lblSearchKey = new javax.swing.JLabel();
-        cmdSearchKey = new javax.swing.JComboBox<>();
+        cmbSearchKey = new javax.swing.JComboBox<>();
         lblFirstName = new javax.swing.JLabel();
         cmbFirstName = new javax.swing.JComboBox<>();
         lblTaxCat = new javax.swing.JLabel();
@@ -109,11 +138,11 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         lblEmail = new javax.swing.JLabel();
         cmbEmail = new javax.swing.JComboBox<>();
         lblPhone1 = new javax.swing.JLabel();
-        cmdPhone1 = new javax.swing.JComboBox<>();
+        cmbPhone1 = new javax.swing.JComboBox<>();
         lblPhone2 = new javax.swing.JLabel();
         cmbPhone2 = new javax.swing.JComboBox<>();
         lblFax = new javax.swing.JLabel();
-        cmdFax = new javax.swing.JComboBox<>();
+        cmbFax = new javax.swing.JComboBox<>();
         lblAddress1 = new javax.swing.JLabel();
         cmbAddress1 = new javax.swing.JComboBox<>();
         lblAddress2 = new javax.swing.JLabel();
@@ -162,8 +191,8 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         lblSearchKey.setText(AppLocal.getIntString("label.searchkey")); // NOI18N
         pnlFields.add(lblSearchKey);
 
-        cmdSearchKey.setName("search_key"); // NOI18N
-        pnlFields.add(cmdSearchKey);
+        cmbSearchKey.setName("search_key"); // NOI18N
+        pnlFields.add(cmbSearchKey);
 
         lblFirstName.setText(AppLocal.getIntString("label.firstname")); // NOI18N
         pnlFields.add(lblFirstName);
@@ -198,8 +227,8 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         lblPhone1.setText(AppLocal.getIntString("label.phone")); // NOI18N
         pnlFields.add(lblPhone1);
 
-        cmdPhone1.setName("telephone"); // NOI18N
-        pnlFields.add(cmdPhone1);
+        cmbPhone1.setName("telephone"); // NOI18N
+        pnlFields.add(cmbPhone1);
 
         lblPhone2.setText(AppLocal.getIntString("label.phone2")); // NOI18N
         pnlFields.add(lblPhone2);
@@ -210,8 +239,8 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         lblFax.setText(AppLocal.getIntString("label.fax")); // NOI18N
         pnlFields.add(lblFax);
 
-        cmdFax.setName("fax"); // NOI18N
-        pnlFields.add(cmdFax);
+        cmbFax.setName("fax"); // NOI18N
+        pnlFields.add(cmbFax);
 
         lblAddress1.setText(AppLocal.getIntString("label.address")); // NOI18N
         pnlFields.add(lblAddress1);
@@ -279,17 +308,17 @@ public class JPanelCustomerFields extends JPanelPopulatable {
     private javax.swing.JComboBox<String> cmbCountry;
     private javax.swing.JComboBox<String> cmbCreditLimit;
     private javax.swing.JComboBox<String> cmbEmail;
+    private javax.swing.JComboBox<String> cmbFax;
     private javax.swing.JComboBox<String> cmbFirstName;
     private javax.swing.JComboBox<String> cmbLastName;
     private javax.swing.JComboBox<String> cmbNotes;
+    private javax.swing.JComboBox<String> cmbPhone1;
     private javax.swing.JComboBox<String> cmbPhone2;
     private javax.swing.JComboBox<String> cmbRegion;
+    private javax.swing.JComboBox<String> cmbSearchKey;
     private javax.swing.JComboBox<String> cmbTaxCat;
     private javax.swing.JComboBox<String> cmbVisible;
     private javax.swing.JComboBox<String> cmbZip;
-    private javax.swing.JComboBox<String> cmdFax;
-    private javax.swing.JComboBox<String> cmdPhone1;
-    private javax.swing.JComboBox<String> cmdSearchKey;
     private javax.swing.JLabel lblAccountId;
     private javax.swing.JLabel lblAddress1;
     private javax.swing.JLabel lblAddress2;
