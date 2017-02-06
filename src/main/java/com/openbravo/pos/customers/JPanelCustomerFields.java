@@ -17,6 +17,7 @@
 package com.openbravo.pos.customers;
 
 import com.openbravo.data.gui.Populator;
+import com.openbravo.data.user.SaveProvider;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import java.util.ArrayList;
@@ -82,6 +83,7 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         config.put("country", (String) cmbCountry.getSelectedItem());
         config.put("searchkey", (String) cmbSearchKey.getSelectedItem());
         config.put("taxid", (String) cmbTaxCat.getSelectedItem());
+        config.put("maxdept", (String) cmbCreditLimit.getSelectedItem());
         
         return config;
     }
@@ -346,5 +348,9 @@ public class JPanelCustomerFields extends JPanelPopulatable {
 
     @Override
     public void setConfig(HashMap<String, String> config) {
+    }
+
+    @Override
+    public void saveData(SaveProvider spr) {
     }
 }

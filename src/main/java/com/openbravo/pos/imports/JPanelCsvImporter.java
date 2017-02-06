@@ -17,6 +17,7 @@
 package com.openbravo.pos.imports;
 
 import com.csvreader.CsvReader;
+import com.openbravo.data.loader.TableDefinition;
 import com.openbravo.pos.panels.JPanelCSVFileChooser;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import com.openbravo.pos.panels.JPanelTable2;
@@ -34,6 +35,7 @@ import java.util.logging.Logger;
  * @author Beat Luginbühl <lugi@lugipfupf.ch>
  */
 public abstract class JPanelCsvImporter extends JPanelTable2 {
+    protected TableDefinition tableDef;
     protected JPanelCSVFileChooser fileChooserPanel;
     protected JPanelPopulatable fieldConfigurator;
     protected JPanelPopulatable itemList;
@@ -43,6 +45,8 @@ public abstract class JPanelCsvImporter extends JPanelTable2 {
     private char csvDelimiter;
     private char csvQuote;
     private String[] csvHeaders;
+    
+    public abstract void saveData();
     
     @Override
     protected void init() {

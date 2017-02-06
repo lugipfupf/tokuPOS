@@ -16,14 +16,25 @@
  */
 package com.openbravo.pos.imports;
 
+import com.openbravo.basic.BasicException;
+import com.openbravo.data.loader.SentenceExec;
 import com.openbravo.pos.customers.JPanelCustomerFields;
 import com.openbravo.data.user.EditorRecord;
+import com.openbravo.data.user.SaveProvider;
+import com.openbravo.pos.customers.DataLogicCustomers;
 import com.openbravo.pos.customers.JPanelCustomerList;
 import com.unicenta.pozapps.forms.AppLocal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CustomersImportPanel extends JPanelCsvImporter {
     @Override
     protected void init() {
+        DataLogicCustomers dlCustomers = (DataLogicCustomers) app.getBean("com.openbravo.pos.customers.DataLogicCustomers");
+        this.tableDef = dlCustomers.getTableCustomers();
+        
+        this.spr = new SaveProvider(this.tableDef, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23});
+        
         this.fieldConfigurator = new JPanelCustomerFields();
         this.fieldConfigurator.setComponentOrientation(getComponentOrientation());
         this.itemList = new JPanelCustomerList();
@@ -40,5 +51,10 @@ public class CustomersImportPanel extends JPanelCsvImporter {
     @Override
     public String getTitle() {
         return AppLocal.getIntString("Menu.CSVCustomerImport");
+    }
+    
+    @Override
+    public void saveData() {
+            this.itemList.saveData(this.spr);
     }
 }

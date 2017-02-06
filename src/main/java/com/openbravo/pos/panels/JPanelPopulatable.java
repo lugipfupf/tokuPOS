@@ -18,6 +18,7 @@ package com.openbravo.pos.panels;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.Populator;
+import com.openbravo.data.user.SaveProvider;
 import com.openbravo.pos.forms.JPanelView;
 import java.util.HashMap;
 import javax.swing.JComponent;
@@ -34,6 +35,8 @@ public abstract class JPanelPopulatable extends JPanel implements JPanelView {
     
     public abstract void setConfig(HashMap<String, String> config);
 
+    public abstract void saveData(SaveProvider spr);
+    
     @Override
     public String getTitle() {
         return "";
@@ -47,4 +50,5 @@ public abstract class JPanelPopulatable extends JPanel implements JPanelView {
     public JComponent getComponent() {
         return this;
     }
+
 }

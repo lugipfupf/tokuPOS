@@ -17,6 +17,7 @@
 package com.openbravo.pos.panels;
 
 import com.openbravo.data.gui.Populator;
+import com.openbravo.data.user.SaveProvider;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.imports.JPanelCsvImporter;
 import java.io.FileNotFoundException;
@@ -207,7 +208,7 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
     }//GEN-LAST:event_txtQuoteKeyTypedHandler
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        
+        this.csvImporter.saveData();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileActionPerformed
@@ -275,5 +276,9 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
 
     @Override
     public void setConfig(HashMap<String, String> config) {
+    }
+
+    @Override
+    public void saveData(SaveProvider spr) {
     }
 }

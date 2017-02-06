@@ -18,13 +18,17 @@ package com.openbravo.pos.customers;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.Populator;
-import com.openbravo.data.user.EditorRecord;
+import com.openbravo.data.loader.TableDefinition;
+import com.openbravo.data.user.SaveProvider;
+import com.openbravo.format.Formats;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import com.openbravo.pos.util.StringUtils;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -75,12 +79,15 @@ public class JPanelCustomerList extends JPanelPopulatable {
                 CustomerInfoExt cust = new CustomerInfoExt(null);
                 
                 String card = this.config.get("card").equals("GENERATE") ? StringUtils.getCardNumber() : record.get(this.config.get("card"));
+                
                 cust.setCard(card);
+                cust.setSearchkey(card);
                 cust.setFirstname(record.get(this.config.get("firstname")));
                 cust.setLastname(record.get(this.config.get("lastname")));
-                cust.setTaxid(record.get(this.config.get("lastname")));
-                cust.setNotes(record.get(this.config.get("lastname")));
-                cust.setVisible(Boolean.parseBoolean(record.get(this.config.get("lastname"))));
+                cust.setName(record.get(this.config.get("firstname")) + " " + record.get(this.config.get("lastname")));
+                cust.setTaxid(record.get(this.config.get("taxid")));
+                cust.setNotes(record.get(this.config.get("notes")));
+                cust.setVisible(true);
                 cust.setEmail(record.get(this.config.get("email")));
                 cust.setPhone(record.get(this.config.get("phone")));
                 cust.setPhone2(record.get(this.config.get("phone2")));
@@ -90,8 +97,17 @@ public class JPanelCustomerList extends JPanelPopulatable {
                 cust.setPostal(record.get(this.config.get("postal")));
                 cust.setCity(record.get(this.config.get("city")));
                 cust.setCountry(record.get(this.config.get("country")));
-                cust.setSearchkey(record.get(this.config.get("name")));
                 cust.setRegion(record.get(this.config.get("region")));
+                
+                Double maxDept = 0d;
+                if (record.get(this.config.get("maxdept")) != null && record.get(this.config.get("maxdept")).length() > 0) {
+                    try {
+                        maxDept = Double.valueOf(record.get(this.config.get("maxdept")));
+                    } catch (NumberFormatException ex) {
+                        Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                cust.setMaxdebt(maxDept);
                 
                 boolean isExisting = false;
                 boolean doImport = !isExisting;
@@ -118,7 +134,54 @@ public class JPanelCustomerList extends JPanelPopulatable {
         return this.model.clearData();
     }
 
+    @Override
+    public void saveData(SaveProvider spr) {
+        this.model.getData().forEach((CustomerListItem item) -> {
+            Object[] customer = new Object[24];
+            try {
+                if (item.doImport) {
+                    CustomerInfoExt custInfoExt = item.getCustomer();
+                    
+                    customer[0] = custInfoExt.getId() == null ? UUID.randomUUID().toString() : custInfoExt.getId();
+                    customer[1] = custInfoExt.getTaxid();
+                    customer[2] = custInfoExt.getSearchkey();
+                    customer[3] = custInfoExt.getName();
+                    customer[4] = custInfoExt.getNotes();
+                    customer[5] = custInfoExt.isVisible();
+                    customer[6] = custInfoExt.getCard();
+                    customer[7] = custInfoExt.getMaxdebt();
+                    customer[8] = null;
+                    customer[9] = null;
 
+                    customer[10] = custInfoExt.getFirstname();
+                    customer[11] = custInfoExt.getLastname();
+                    customer[12] = custInfoExt.getEmail();
+                    customer[13] = custInfoExt.getPhone();
+                    customer[14] = custInfoExt.getPhone2();
+                    customer[15] = custInfoExt.getFax();
+
+                    customer[16] = custInfoExt.getAddress();
+                    customer[17] = custInfoExt.getAddress2();
+                    customer[18] = custInfoExt.getPostal();
+                    customer[19] = custInfoExt.getCity();
+                    customer[20] = custInfoExt.getRegion();
+                    customer[21] = custInfoExt.getCountry();
+
+                    customer[22] = null;
+                    customer[23] = null;
+                    
+                    if (item.isExisting()) {
+                        spr.updateData(customer);
+                    } else {
+                        spr.insertData(customer);
+                    }
+                }
+            } catch (BasicException ex) {
+                Logger.getLogger(JPanelCustomerList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblData;
@@ -154,6 +217,10 @@ public class JPanelCustomerList extends JPanelPopulatable {
             
             fireTableDataChanged();
         }
+        
+        public ArrayList<CustomerListItem> getData() {
+            return this.customerList;
+        }
 
         @Override
         public String getColumnName(int column) {
@@ -183,7 +250,7 @@ public class JPanelCustomerList extends JPanelPopulatable {
                 case 0:
                     return customer.getDoImport();
                 case 1:
-                    return customer.isIsExisting();
+                    return customer.isExisting();
                 case 2:
                     return customer.getCustomer().getCard();
                 case 3:
@@ -237,7 +304,7 @@ public class JPanelCustomerList extends JPanelPopulatable {
             return customer;
         }
 
-        public boolean isIsExisting() {
+        public boolean isExisting() {
             return isExisting;
         }
         
