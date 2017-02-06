@@ -197,6 +197,21 @@ public class JPanelCustomerList extends JPanelPopulatable {
             fireTableDataChanged();
             return this.getRowCount() == 0;
         }
+
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            if (columnIndex == 0) {
+                return true;
+            }
+            
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+            this.customerList.get(rowIndex).setDoImport((Boolean) aValue);
+        }
+    
         
     }
     
