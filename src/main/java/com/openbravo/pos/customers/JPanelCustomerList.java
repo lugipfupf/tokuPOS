@@ -122,7 +122,7 @@ public class JPanelCustomerList extends JPanelPopulatable {
         
         public CustomerListModel() {
             colNames.put(0, AppLocal.getIntString("label.import"));
-            colNames.put(1, AppLocal.getIntString("label.new"));
+            colNames.put(1, AppLocal.getIntString("label.entry_exists"));
             colNames.put(2, AppLocal.getIntString("label.card"));
             colNames.put(3, AppLocal.getIntString("label.firstname"));
             colNames.put(4, AppLocal.getIntString("label.lastname"));
@@ -211,8 +211,6 @@ public class JPanelCustomerList extends JPanelPopulatable {
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
             this.customerList.get(rowIndex).setDoImport((Boolean) aValue);
         }
-    
-        
     }
     
     private class CustomerListItem {
