@@ -109,6 +109,8 @@ public class JPanelCustomerFields extends JPanelPopulatable {
         });
         return true;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
@@ -342,4 +344,7 @@ public class JPanelCustomerFields extends JPanelPopulatable {
     private javax.swing.JPanel pnlFields;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void setConfig(HashMap<String, String> config) {
+    }
 }

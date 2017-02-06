@@ -16,13 +16,13 @@
  */
 package com.openbravo.pos.panels;
 
-import com.openbravo.pos.imports.JPanelCsvImporter;
 import com.openbravo.data.gui.Populator;
 import com.openbravo.pos.forms.AppLocal;
+import com.openbravo.pos.imports.JPanelCsvImporter;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.input.KeyCode;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -266,5 +266,14 @@ public class JPanelCSVFileChooser extends JPanelPopulatable {
             this.btnRead.setEnabled(true);
             this.btnSave.setEnabled(false);
         }
+    }
+
+    @Override
+    public HashMap<String, String> getConfig() {
+        return null;
+    }
+
+    @Override
+    public void setConfig(HashMap<String, String> config) {
     }
 }

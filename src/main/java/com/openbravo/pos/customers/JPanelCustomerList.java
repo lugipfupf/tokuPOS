@@ -16,10 +16,13 @@
  */
 package com.openbravo.pos.customers;
 
+import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.Populator;
+import com.openbravo.data.user.EditorRecord;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.panels.JPanelPopulatable;
 import com.openbravo.pos.util.StringUtils;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.table.AbstractTableModel;
@@ -58,6 +61,7 @@ public class JPanelCustomerList extends JPanelPopulatable {
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     @Override
     public Populator<ArrayList<HashMap<String, String>>> getPopulator() {
         return (ArrayList<HashMap<String, String>> data) -> {
@@ -97,6 +101,11 @@ public class JPanelCustomerList extends JPanelPopulatable {
             
             this.model.setData(customers);
         };
+    }
+    
+    @Override
+    public HashMap<String, String> getConfig() {
+        return null;
     }
 
     @Override

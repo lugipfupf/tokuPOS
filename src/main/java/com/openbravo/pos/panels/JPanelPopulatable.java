@@ -30,13 +30,9 @@ import javax.swing.JPanel;
 public abstract class JPanelPopulatable extends JPanel implements JPanelView {
     public abstract Populator getPopulator();
     
-    public HashMap<String, String> getConfig() {
-        throw new UnsupportedOperationException("This optional method has to be overriden in order to use it");
-    }
+    public abstract HashMap<String, String> getConfig();
     
-    public void setConfig(HashMap<String, String> config) {
-        throw new UnsupportedOperationException("This optional method has to be overriden in order to use it");
-    }
+    public abstract void setConfig(HashMap<String, String> config);
 
     @Override
     public String getTitle() {
