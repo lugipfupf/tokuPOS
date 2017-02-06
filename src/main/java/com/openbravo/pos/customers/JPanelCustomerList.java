@@ -78,7 +78,7 @@ public class JPanelCustomerList extends JPanelPopulatable {
             data.forEach((HashMap<String, String> record) -> {
                 CustomerInfoExt cust = new CustomerInfoExt(null);
                 
-                String card = this.config.get("card").equals("GENERATE") ? StringUtils.getCardNumber() : record.get(this.config.get("card"));
+                String card = this.config.get("card").equals("GENERATE") ? "c" + StringUtils.getCardNumber() : record.get(this.config.get("card"));
                 
                 cust.setCard(card);
                 cust.setSearchkey(card);
