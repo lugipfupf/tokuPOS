@@ -24,6 +24,7 @@ import com.openbravo.data.loader.*;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.BeanFactoryDataSingle;
+import com.openbravo.pos.forms.DataLogicSales;
 
 /**
  * @author JG uniCenta
@@ -48,6 +49,36 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
         Datas.BOOLEAN, 
         Datas.STRING};
     
+    private static final String[] fields = new String[]
+    {
+        "ID", 
+        "TAXID", 
+        "SEARCHKEY", 
+        "NAME", 
+        "NOTES", 
+        "VISIBLE", 
+        "CARD", 
+        "MAXDEBT", 
+        "CURDATE", 
+        "CURDEBT",
+        "FIRSTNAME",
+        "LASTNAME",
+        "EMAIL",
+        "PHONE",
+        "PHONE2",
+        "FAX",
+        "ADDRESS",
+        "ADDRESS2",
+        "POSTAL",
+        "CITY",
+        "REGION",
+        "COUNTRY",
+        "TAXCATEGORY",
+        "IMAGE" 
+    };
+    
+    private static String baseSentence;
+    
     /**
      *
      * @param s
@@ -58,31 +89,7 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
         this.s = s;
         tcustomers = new TableDefinition(s
             , "CUSTOMERS"
-            , new String[] { 
-                "ID", 
-                "TAXID", 
-                "SEARCHKEY", 
-                "NAME", 
-                "NOTES", 
-                "VISIBLE", 
-                "CARD", 
-                "MAXDEBT", 
-                "CURDATE", 
-                "CURDEBT",
-                "FIRSTNAME",
-                "LASTNAME",
-                "EMAIL",
-                "PHONE",
-                "PHONE2",
-                "FAX",
-                "ADDRESS",
-                "ADDRESS2",
-                "POSTAL",
-                "CITY",
-                "REGION",
-                "COUNTRY",
-                "TAXCATEGORY",
-                "IMAGE" }
+            , fields
             , new String[] { 
                 "ID", 
                 AppLocal.getIntString("label.taxid"),
@@ -160,6 +167,14 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
                 Formats.NULL }
             , new int[] {0}
         );
+        
+        StringBuilder sqlBuilder = new StringBuilder("SELECT ");
+        for (int i = 0; i < fields.length; i++) {
+            sqlBuilder.append(fields[i]);
+            sqlBuilder.append(", ");
+        }
+        sqlBuilder.append(" FROM CUSTOMERS");
+        this.baseSentence = sqlBuilder.toString();
     }
     
 // JG 20 Sept 12 extended for Postal - CustomerList list
@@ -299,5 +314,18 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
      */
     public final TableDefinition getTableCustomers() {
         return tcustomers;
-    }  
+    }
+    
+    public CustomerInfoExt findCustomersBy(String field, Object value) {
+        
+        StringBuilder sqlBuilder = new StringBuilder(this.baseSentence);
+        sqlBuilder.append(" WHERE ");
+        sqlBuilder.append(field);
+        sqlBuilder.append(" = ?");
+        
+        PreparedSentence sentence = new PreparedSentence(this.s, sqlBuilder.toString());
+        
+        // will be implemented for next release
+        return null;
+    }
 }

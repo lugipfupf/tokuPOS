@@ -131,6 +131,8 @@ group = menu.addGroup("Menu.Backoffice");
     submenu = group.addSubmenu("/com/openbravo/images/utilities.png", "Menu.Tools", "com.openbravo.pos.imports.JPanelCSV");	
     submenu.addTitle("Menu.Import");
         submenu.addPanel("/com/openbravo/images/import.png", "Menu.CSVImport", "com.openbravo.pos.imports.JPanelCSVImport");
+        submenu.addPanel("/com/openbravo/images/import.png", "Menu.CSVProductsImport", "com.openbravo.pos.imports.ProductsImportPanel");
+        submenu.addPanel("/com/openbravo/images/import.png", "Menu.CSVCustomerImport", "com.openbravo.pos.imports.CustomersImportPanel");
         submenu.addPanel("/com/openbravo/images/database.png", "Menu.CSVReset", "com.openbravo.pos.imports.JPanelCSVCleardb");
     submenu.addTitle("Menu.Import.Reports");
         submenu.addPanel("/com/openbravo/images/reports.png", "Menu.UpdatedPrices", "/com/openbravo/reports/updatedprices.bs");

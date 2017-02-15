@@ -268,8 +268,8 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
   
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel container;
-    private javax.swing.JPanel toolbar;
+    protected javax.swing.JPanel container;
+    protected javax.swing.JPanel toolbar;
     // End of variables declaration//GEN-END:variables
     
 }
