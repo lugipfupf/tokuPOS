@@ -855,9 +855,9 @@ public class JPaneldbMigrate extends JPanel implements JPanelView {
                             + "ATTRIBUTESET_ID, STOCKCOST, STOCKVOLUME, IMAGE, "
                             + "ISCOM, ISSCALE, ISKITCHEN, PRINTKB, SENDSTATUS, "
                             + "ISSERVICE, ATTRIBUTES, DISPLAY, ISVPRICE, "
-                            + "ISVERPATRIB, TEXTTIP, WARRANTY, STOCKUNITS)"
+                            + "ISVERPATRIB, TEXTTIP, WARRANTY, STOCKUNITS, ISARCHIVE)"
                                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-                                + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         pstmt = con2.prepareStatement(SQL);
                         pstmt.setString(1, rs.getString("ID"));
                         pstmt.setString(2, rs.getString("REFERENCE"));
@@ -886,6 +886,7 @@ public class JPaneldbMigrate extends JPanel implements JPanelView {
                         pstmt.setBoolean(25, rs.getBoolean("WARRANTY"));
 // JG Aug 2014 for 3.80 from 3.70
                         pstmt.setDouble(26, rs.getDouble("STOCKUNITS"));                        
+                        pstmt.setBoolean(27, rs.getBoolean("ISARCHIVE"));
 // Dis-Allow Product Control account
                     if (!"xxx999_999xxx_x9x9x9".equals(rs.getString(1))) {
                         pstmt.executeUpdate();
