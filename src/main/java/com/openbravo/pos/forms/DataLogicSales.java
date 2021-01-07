@@ -1536,13 +1536,14 @@ public Object transact() throws BasicException {
                             + "WHERE ?(QBF_FILTER) "
                                 + "ORDER BY P.REFERENCE", 
                         new String[] {
-                            "P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE"})
+                            "P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE", "P.ISARCHIVE"})
 		, new SerializerWriteBasic(new Datas[] {
                     Datas.OBJECT, Datas.STRING, 
                     Datas.OBJECT, Datas.DOUBLE, 
                     Datas.OBJECT, Datas.DOUBLE, 
                     Datas.OBJECT, Datas.STRING, 
-                    Datas.OBJECT, Datas.STRING})
+                    Datas.OBJECT, Datas.STRING,
+                    Datas.OBJECT, Datas.BOOLEAN})
 		, productsRow.getSerializerRead());
     }
 
