@@ -137,7 +137,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 new Field(AppLocal.getIntString("label.stockunits"), Datas.DOUBLE, Formats.DOUBLE),                         
                 
                 new Field("ISCATALOG", Datas.BOOLEAN, Formats.BOOLEAN),                                                                     
-                new Field("CATORDER", Datas.INT, Formats.INT)
+                new Field("CATORDER", Datas.INT, Formats.INT),
+                new Field("ISARCHIVE", Datas.BOOLEAN, Formats.BOOLEAN)
 
         );
     }
@@ -1528,19 +1529,21 @@ public Object transact() throws BasicException {
                                         + "THEN " + s.DB.FALSE() 
                                         + " ELSE " + s.DB.TRUE() 
                                     + " END, "
-                                + "C.CATORDER "
+                                + "C.CATORDER, "
+                                + "P.ISARCHIVE "
                                 + "FROM PRODUCTS P LEFT OUTER JOIN PRODUCTS_CAT C "
                                 + "ON P.ID = C.PRODUCT "
                             + "WHERE ?(QBF_FILTER) "
                                 + "ORDER BY P.REFERENCE", 
                         new String[] {
-                            "P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE"})
+                            "P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE", "P.ISARCHIVE"})
 		, new SerializerWriteBasic(new Datas[] {
                     Datas.OBJECT, Datas.STRING, 
                     Datas.OBJECT, Datas.DOUBLE, 
                     Datas.OBJECT, Datas.DOUBLE, 
                     Datas.OBJECT, Datas.STRING, 
-                    Datas.OBJECT, Datas.STRING})
+                    Datas.OBJECT, Datas.STRING,
+                    Datas.OBJECT, Datas.BOOLEAN})
 		, productsRow.getSerializerRead());
     }
 
@@ -1648,7 +1651,8 @@ public Object transact() throws BasicException {
                                         + "ISVERPATRIB = ?, "
                                         + "TEXTTIP = ?, "
                                         + "WARRANTY = ?, "
-                                        + "STOCKUNITS = ? "
+                                        + "STOCKUNITS = ?, "
+                                        + "ISARCHIVE = ? "
                                         + "WHERE ID = ?"
 				, new SerializerWriteBasicExt(productsRow.getDatas(), 
                                         new int[]{0, 
@@ -1656,7 +1660,7 @@ public Object transact() throws BasicException {
                                             6, 7, 8, 9, 10, 
                                             11, 12, 13, 14, 15,
                                             16, 17, 18, 19, 20, 
-                                            21, 22, 23, 24, 25, 
+                                            21, 22, 23, 24, 25, 28,
                                             0})).exec(params);
                     
 			if (i > 0) {
