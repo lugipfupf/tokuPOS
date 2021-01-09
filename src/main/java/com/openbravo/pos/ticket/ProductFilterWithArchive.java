@@ -39,13 +39,13 @@ import java.util.List;
  *
  * @author JG uniCenta
  */
-public class ProductFilter extends javax.swing.JPanel implements ReportEditorCreator {
+public class ProductFilterWithArchive extends javax.swing.JPanel implements ReportEditorCreator {
     
     private SentenceList m_sentcat;
     private ComboBoxValModel m_CategoryModel;
 
     /** Creates new form JQBFProduct */
-    public ProductFilter() {
+    public ProductFilterWithArchive() {
 
         initComponents();
     }
@@ -84,7 +84,7 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
      */
     public SerializerWrite getSerializerWrite() {
         return new SerializerWriteBasic(
-                new Datas[] {Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING});
+                new Datas[] {Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING, Datas.OBJECT});
     }
 
     /**
@@ -109,7 +109,8 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
                 m_jCboPriceBuy.getSelectedItem(), Formats.CURRENCY.parseValue(m_jPriceBuy.getText()),           
                 m_jCboPriceSell.getSelectedItem(), Formats.CURRENCY.parseValue(m_jPriceSell.getText()),
                 m_CategoryModel.getSelectedKey() == null ? QBFCompareEnum.COMP_NONE : QBFCompareEnum.COMP_EQUALS, m_CategoryModel.getSelectedKey(),
-                QBFCompareEnum.COMP_NONE, null
+                QBFCompareEnum.COMP_NONE, null,
+                QBFCompareEnum.COMP_EQUALS, m_jCheckArchive.isSelected()
             };
         } else {            
             // Filtro por codigo de barras.
@@ -118,7 +119,8 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
                 QBFCompareEnum.COMP_NONE, null,
                 QBFCompareEnum.COMP_NONE, null,
                 QBFCompareEnum.COMP_NONE, null,
-                QBFCompareEnum.COMP_RE, "%" + m_jBarcode.getText() + "%"
+                QBFCompareEnum.COMP_RE, "%" + m_jBarcode.getText() + "%",
+                QBFCompareEnum.COMP_NONE, null
             };
         }
     } 
@@ -145,6 +147,7 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
         m_jCboPriceSell = new javax.swing.JComboBox();
         m_jPriceBuy = new javax.swing.JTextField();
         m_jPriceSell = new javax.swing.JTextField();
+        m_jCheckArchive = new javax.swing.JCheckBox();
 
         m_jBarcode.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         m_jBarcode.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -190,6 +193,9 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
         m_jPriceSell.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         m_jPriceSell.setPreferredSize(new java.awt.Dimension(150, 30));
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
+        m_jCheckArchive.setText(bundle.getString("label.Archive")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,7 +229,9 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(m_jCboPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(m_jPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(m_jCheckArchive)
+                                    .addComponent(m_jPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -247,7 +255,8 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(m_jCboName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m_jName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(m_jName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jCheckArchive))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -265,6 +274,7 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
     private javax.swing.JComboBox m_jCboName;
     private javax.swing.JComboBox m_jCboPriceBuy;
     private javax.swing.JComboBox m_jCboPriceSell;
+    private javax.swing.JCheckBox m_jCheckArchive;
     private javax.swing.JTextField m_jName;
     private javax.swing.JTextField m_jPriceBuy;
     private javax.swing.JTextField m_jPriceSell;

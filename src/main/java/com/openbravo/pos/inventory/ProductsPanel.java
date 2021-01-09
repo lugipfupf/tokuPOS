@@ -27,7 +27,7 @@ import com.openbravo.data.user.SaveProvider;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.panels.JPanelTable2;
-import com.openbravo.pos.ticket.ProductFilter;
+import com.openbravo.pos.ticket.ProductFilterWithArchive;
 import java.awt.Component;
 import javax.swing.JButton;
 
@@ -40,7 +40,7 @@ import javax.swing.JButton;
 public class ProductsPanel extends JPanelTable2 implements EditorListener {
 
     private ProductsEditor jeditor;
-    private ProductFilter jproductfilter;    
+    private ProductFilterWithArchive jproductfilter;    
     
     private DataLogicSales m_dlSales = null;
     
@@ -56,7 +56,7 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
         m_dlSales = (DataLogicSales) app.getBean("com.openbravo.pos.forms.DataLogicSales");
         
         // el panel del filtro
-        jproductfilter = new ProductFilter();
+        jproductfilter = new ProductFilterWithArchive();
         jproductfilter.init(app);
 
         row = m_dlSales.getProductsRow();
